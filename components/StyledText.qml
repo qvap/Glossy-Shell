@@ -1,7 +1,5 @@
 import QtQuick
-import QtQuick.Effects
 import QtQuick.Layouts
-import qs.config
 
 Text {
     id: root
@@ -16,14 +14,9 @@ Text {
         family: "Frutiger"
         pixelSize: 18
     }
-    layer.enabled: true
-    layer.effect: MultiEffect {
-        shadowEnabled:true
-        shadowColor: "#000000"
-    }
 
     Behavior on opacity {
-    NumberAnimation {
+        NumberAnimation {
             duration: 250
             easing.type: Easing.InOutCubic
         }

@@ -11,7 +11,7 @@ Item {
     anchors {
         fill: parent
     }
-    
+
     // Background
     StyledRectangle {
         id: barBackground
@@ -47,7 +47,7 @@ Item {
             bottom: parent.bottom
             left: undefined
             right: parent.right
-            rightMargin: 10
+            rightMargin: 5
         }
         spacing: 5
         layoutDirection: Qt.RightToLeft
