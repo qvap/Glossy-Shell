@@ -8,4 +8,9 @@ JsonObject {
     property bool show_date_in_clock_widget: true
     property real panel_glow_width: 50.0
     property bool floating_bar: true
+
+    component EasingCurves: JsonObject {
+        property list<real> bubblyWidth: [0.3, 0, 0.8, 0.15, 1, 1]
+        property list<real> bubblyHeight: [0.3, 0, 0.8, 0.15, 1, 1]
+    }
 }

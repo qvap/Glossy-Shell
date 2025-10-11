@@ -2,15 +2,15 @@ import QtQuick
 import Quickshell
 import Quickshell.Widgets
 import qs.components
+import qs.components.containers
 import qs.config
 import qs.modules
 
 Variants {
     model: Quickshell.screens
-    PanelWindow {
+    ContainerWindow {
+        name: "bar"
         required property ShellScreen modelData
-
-        color: "transparent"
 
         anchors {
             left: true
@@ -18,17 +18,15 @@ Variants {
             right: true
         }
 
-        /* cursed ahh margins */
+        /* it has 8 because we need to compensate
+        big container window for shadow */
+        exclusiveZone: Config.style.bar_chunkiness - 8
 
-        margins {
-            top: -10
-        }
-
-        implicitHeight: Config.style.bar_chunkiness + 10
+        implicitHeight: Config.style.bar_chunkiness
 
         BarContent {
             anchors {
-                topMargin: Config.style.floating_bar ? 10: 0
+                topMargin: Config.style.floating_bar ? 5: 0
                 leftMargin: Config.style.floating_bar ? 5: 0
                 rightMargin: Config.style.floating_bar ? 5: 0
                 bottomMargin: Config.style.floating_bar ? 5: 0

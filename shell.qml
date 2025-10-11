@@ -8,9 +8,11 @@ import qs.components
 import qs.config
 import qs.services
 import qs.modules
+import qs.modules.applauncher
 import qs.modules.screencorners
 
 ShellRoot {
   LazyLoader {active: true; component: ScreenCorners{}}
+  MainWindow {}
   Bar {}
 }

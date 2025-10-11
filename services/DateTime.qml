@@ -5,6 +5,8 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
+/* im vewy shy and vewy sowwy that I yanked that from end-4's shell (,,>﹏<,,) */
+
 Singleton {
     property var clock: SystemClock {
         id: clock

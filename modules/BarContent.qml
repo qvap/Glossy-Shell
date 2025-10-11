@@ -47,7 +47,7 @@ Item {
             bottom: parent.bottom
             left: undefined
             right: parent.right
-            rightMargin: 5
+            rightMargin: 1
         }
         spacing: 5
         layoutDirection: Qt.RightToLeft
