@@ -9,12 +9,13 @@ Text {
     property bool animateChange: false
     property real animationDistanceX: 0
     property real animationDistanceY: 6
+    property bool wrapping: true
 
     renderType: Text.NativeRendering
     verticalAlignment: Text.AlignVCenter
-    wrapMode: Text.WrapAnywhere
-    elide: Text.ElideRight
-    maximumLineCount: 1
+    wrapMode: wrapping ? Text.WrapAnywhere : Text.NoWrap
+    elide: wrapping ? Text.ElideRight : Text.ElideNone
+    maximumLineCount: wrapping ? 1 : 9999
     font {
         hintingPreference: Font.PreferFullHinting
         family: Config.style.fonts.sans

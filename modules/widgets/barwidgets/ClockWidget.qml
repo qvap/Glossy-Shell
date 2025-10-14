@@ -29,6 +29,7 @@ Item {
         spacing: 0
 
         StyledText {
+            wrapping: false
             font.bold: true
             color: "white"
             text: DateTime.shortDate
@@ -37,6 +38,7 @@ Item {
         }
 
         StyledText {
+            wrapping: false
             font.bold: true
             color: "white"
             text: "  ✧  "
@@ -45,6 +47,7 @@ Item {
         }
     
         StyledText {
+            wrapping: false
             font.bold: true
             color: "white"
             text: DateTime.time
