@@ -2,16 +2,22 @@ import QtQuick
 import QtQuick.Controls
 import qs.config
 
+/* 21 */
+
 TextField {
     id: root
 
-    color: "#000000"
-    placeholderTextColor: "#222222"
+    color: "#ffffff"
+    placeholderTextColor: "#bfbfbf"
+
+    font {
+        family: Config.style.fonts.sans
+        pixelSize: 16
+    }
+
+    placeholderText: "Search..."
 
     background: Rectangle {
-        color: "#222222"
-        radius: Config.style.rounding
-        border.width: 0
+        color: "transparent"
     }
-    
 }

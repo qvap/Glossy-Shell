@@ -30,7 +30,7 @@ Item {
             id: maskInner
 
             anchors.fill: parent
-            radius: Config.style.screen_rounding
+            radius: Config.style.rounding.screen_rounding
             }
         }
     }

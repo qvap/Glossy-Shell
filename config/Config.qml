@@ -3,6 +3,8 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 
+/* manages load/save for configs */
+
 Singleton {
     id: root
 

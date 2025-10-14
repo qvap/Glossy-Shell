@@ -11,8 +11,15 @@ import qs.modules
 import qs.modules.applauncher
 import qs.modules.screencorners
 
+/* why hello there!
+/* to clarify: im not a good developer,
+/* and things that you can see here
+/* may scare or disgust you, so
+/* think twice before diving here
+/* bye! */
+
 ShellRoot {
   LazyLoader {active: true; component: ScreenCorners{}}
+
   MainWindow {}
-  Bar {}
 }

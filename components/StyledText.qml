@@ -1,5 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.config
+
+/* whats 9 + 10 */
 
 Text {
     id: root
@@ -9,9 +12,12 @@ Text {
 
     renderType: Text.NativeRendering
     verticalAlignment: Text.AlignVCenter
+    wrapMode: Text.WrapAnywhere
+    elide: Text.ElideRight
+    maximumLineCount: 1
     font {
-        hintingPreference: Font.PreferDefaultHinting
-        family: "Frutiger"
+        hintingPreference: Font.PreferFullHinting
+        family: Config.style.fonts.sans
         pixelSize: 18
     }
 

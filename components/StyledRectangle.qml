@@ -4,6 +4,9 @@ import QtQuick.Effects
 import Quickshell.Widgets
 import qs.config
 
+/* more cooler aero thingy */
+/* gradient broke gonna fix someday */
+
 Item {
     id: root
     property alias radius: baseRect.radius
@@ -18,7 +21,8 @@ Item {
         id: baseRect
         anchors.fill: parent
         color: "black"
-        radius: Config.style.rounding
+
+        radius: Config.style.rounding.rounding
         gradient: LinearGradient {
             GradientStop {
                 position: 0.0
@@ -45,9 +49,9 @@ Item {
                 anchors.fill: parent
 
                 transform: Scale {
-                    origin.x: root.width / 2
-                    origin.y: root.height / 2
-                    xScale: root.width / Config.style.panel_glow_width
+                    origin.x: root.x + root.width / 2
+                    origin.y: root.y + root.height / 2
+                    xScale: root.width / Config.style.gradients.panel_glow_width
                     yScale: 1.0
                 }
                 ShapePath {
@@ -80,7 +84,7 @@ Item {
             id: borderRect
             anchors.fill: parent
             color: "transparent"
-            border.color: "#182e60"
+            border.color: "#1d3d88"
             radius: baseRect.radius
             border.width: 2
             border.pixelAligned: true

@@ -4,8 +4,10 @@ import Quickshell
 import Quickshell.Widgets
 import qs.components
 import qs.modules
-import qs.modules.widgets
+import qs.modules.widgets.barwidgets
 import qs.config
+
+/* ofc I have no important things to do than leaving this comments */
 
 Item {
     anchors {
@@ -16,7 +18,7 @@ Item {
     StyledRectangle {
         id: barBackground
         anchors.fill: parent
-        radius: Config.style.floating_bar ? Config.style.rounding : 0
+        radius: Config.style.barstyle.floating_bar ? Config.style.rounding.rounding : 0
     }
 
     RowLayout {
@@ -53,7 +55,7 @@ Item {
         layoutDirection: Qt.RightToLeft
 
         BarGroup {
-            id: rightWidgetsGroup
+            id: clockGroup
             Layout.alignment: Qt.AlignVCenter
 
             ClockWidget {

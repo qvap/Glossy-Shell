@@ -6,31 +6,23 @@ import qs.components.containers
 import qs.config
 import qs.modules
 
-Variants {
-    model: Quickshell.screens
-    ContainerWindow {
-        name: "bar"
-        required property ShellScreen modelData
+/* you should delete your computer now */
 
+Item {
+    anchors {
+        left: parent?.left
+        bottom: parent?.bottom
+        right: parent?.right
+    }
+
+    implicitHeight: Config.style.barstyle.bar_chunkiness
+
+    BarContent {
         anchors {
-            left: true
-            bottom: true
-            right: true
-        }
-
-        /* it has 8 because we need to compensate
-        big container window for shadow */
-        exclusiveZone: Config.style.bar_chunkiness - 8
-
-        implicitHeight: Config.style.bar_chunkiness
-
-        BarContent {
-            anchors {
-                topMargin: Config.style.floating_bar ? 5: 0
-                leftMargin: Config.style.floating_bar ? 5: 0
-                rightMargin: Config.style.floating_bar ? 5: 0
-                bottomMargin: Config.style.floating_bar ? 5: 0
-            }
+            topMargin: Config.style.barstyle.floating_bar ? 5: 0
+            leftMargin: Config.style.barstyle.floating_bar ? 5: 0
+            rightMargin: Config.style.barstyle.floating_bar ? 5: 0
+            bottomMargin: Config.style.barstyle.floating_bar ? 5: 0
         }
     }
 }

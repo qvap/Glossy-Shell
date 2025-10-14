@@ -1,65 +1,104 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Widgets
 import qs
 import qs.components
+import qs.config
+import qs.services
+
+/* cool! why so buggy tho */
 
 Item {
     id: root
+    
     required property ShellScreen screen
 
-    // Content dimensions
-    implicitWidth: background.implicitWidth
-    implicitHeight: background.implicitHeight
+    implicitWidth: 450
+    height: columnLayout.height
 
-    // Background container
-    StyledRectangle {
-        id: background
-        
-        anchors.fill: parent
-        implicitWidth: 500
-        implicitHeight: columnLayout.implicitHeight + columnLayout.anchors.margins * 2
-        
-        // Content layout
-        Column {
-            id: columnLayout
-            
-            anchors {
-                fill: parent
-                margins: 10
-            }
-            
+    Behavior on implicitHeight {
+        BaseAnimation {}
+    }
+
+    ColumnLayout {
+        id: columnLayout
+
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+        spacing: 10
+
+        height: appList.implicitHeight + searchBackground.implicitHeight + spacing
+
+        StyledListView {
+            id: appList
+
+            Layout.fillWidth: true
+            implicitHeight: 200
+
             spacing: 10
+
+            clip: true
+
+            orientation: Qt.Vertical
+
+            verticalLayoutDirection: ListView.BottomToTop
+
+            model: DesktopEntries.applications.values.filter(a => a.name.toLowerCase().includes(search.text.toLowerCase()))
             
-            // Application list placeholder
-            Item {
-                width: parent.width
-                height: 300
-                
-                StyledText {
-                    anchors.centerIn: parent
-                    text: qsTr("Application list will be here")
-                    color: "#666666"
-                }
-            }
-            
-            // Search field at the bottom
+            delegate: AppItem {}
+        }
+
+        StyledPanelRectangle {
+            id: searchBackground
+
+            Layout.fillWidth: true
+
+            implicitHeight: 60
+
             StyledTextField {
                 id: search
                 
-                width: parent.width
-                implicitHeight: 50
-                
-                placeholderText: qsTr("Search...")
-                placeholderTextColor: "#888888"
-                
-                Component.onCompleted: forceActiveFocus()
-                
-                // Handle Escape key to close launcher
-                Keys.onEscapePressed: Global.launcherOpen = false
+                anchors {
+                    fill: parent
+                }
+            
+                Keys.onEscapePressed: {
+                    Global.launcherOpen = false
+                }
             }
         }
+    }
+
+    layer.enabled: true
+    layer.effect: OpacityMask {
+        maskSource: maskRect
+    }
+
+    Rectangle {
+        id: maskRect
+
+        layer.enabled: true
+        visible: false
+
+        anchors {
+            fill: parent
+        }
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: Qt.rgba(0, 0, 0, 0) }
+            GradientStop { position: 0.2; color: Qt.rgba(0, 0, 0, 1) }
+        }
+    }
+
+    Component.onCompleted: {
+        search.forceActiveFocus()
     }
 }

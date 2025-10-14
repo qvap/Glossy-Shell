@@ -5,12 +5,14 @@ import qs.config
 import qs.services
 import qs.components
 
+/* the only thing thats cool in this shell */
+
 Item {
     id: root
     property int padding: 10
-    property bool showDate: Config.style.show_date_in_clock_widget
+    property bool showDate: Config.style.barstyle.show_date_in_clock_widget
     implicitWidth: rowLayout.implicitWidth + padding * 2
-    implicitHeight: Config.style.bar_chunkiness - padding * 2
+    implicitHeight: Config.style.barstyle.bar_chunkiness - padding * 2
 
     property bool hovered: false
 
@@ -36,7 +38,6 @@ Item {
 
         StyledText {
             font.bold: true
-            Layout.topMargin: 1
             color: "white"
             text: "  ✧  "
             opacity: hovered ? 1 : 0

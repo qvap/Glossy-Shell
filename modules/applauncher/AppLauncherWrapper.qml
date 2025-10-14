@@ -10,14 +10,12 @@ import qs.components
 import qs.config
 import qs.components.containers
 
+/* бипки */
+
 Item {
     id: root
 
     required property ShellScreen screen
-
-    Component.onCompleted: {
-        parent.widgetRegions?.push(mask)
-    }
 
     implicitHeight: 0
     implicitWidth: launcher.implicitWidth
@@ -30,59 +28,30 @@ Item {
         running: false
         ScriptAction {
             script: {
+                if (hide.running) { hide.stop() }
                 launcher.active = true
                 launcher.visible = true
             }
         }
         PauseAnimation { duration: 100 }
-        ParallelAnimation {
-            BaseAnimation {
-                duration: 250
-                easing.type: Easing.OutQuad
-                target: root
-                property: "implicitHeight"
-                to: launcher.implicitHeight * 1.2
-            }
-            BaseAnimation {
-                duration: 250
-                easing.type: Easing.OutQuad
-                target: root
-                property: "implicitWidth"
-                to: launcher.implicitWidth * 0.8
-            }
-        }
-        ParallelAnimation {
-            BaseAnimation {
-                duration: 500
-                easing.type: Easing.OutQuad
-                target: root
-                property: "implicitHeight"
-                to: launcher.implicitHeight
-            }
-            BaseAnimation {
-                duration: 500
-                easing.type: Easing.OutQuad
-                target: root
-                property: "implicitWidth"
-                to: launcher.implicitWidth
-            }
+        BaseAnimation {
+            duration: 400
+            easing.type: Easing.OutQuart
+            target: root
+            property: "implicitHeight"
+            to: launcher.implicitWidth
         }
     }
 
     SequentialAnimation {
         id: hide
         running: false
-        ParallelAnimation {
-            BaseAnimation {
-                target: root
-                property: "implicitHeight"
-                to: 0
-            }
-            BaseAnimation {
-                target: root
-                property: "implicitWidth"
-                to: 0
-            }
+        BaseAnimation {
+            duration: 400
+            easing.type: Easing.OutQuart
+            target: root
+            property: "implicitHeight"
+            to: 0
         }
         ScriptAction {
             script: {
@@ -94,7 +63,7 @@ Item {
 
     anchors {
         bottom: parent.bottom
-        bottomMargin: Config.style.bar_chunkiness + 10
+        bottomMargin: 60
         horizontalCenter: parent.horizontalCenter
     }
 
