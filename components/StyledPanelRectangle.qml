@@ -12,8 +12,16 @@ Item {
 
     property alias color: base.color
 
-    LighterDropShadow {
+    /*LighterDropShadow {
         base: base
+    }*/
+    Rectangle { // some dropoff 'cause the text is unreadable
+        anchors {
+            fill: parent
+        }
+        color: "#00364f"
+        radius: Config.style.rounding.rounding
+        opacity: 0
     }
 
     Rectangle {
@@ -23,13 +31,13 @@ Item {
         }
         radius: Config.style.rounding.rounding
         gradient: Gradient {
-            GradientStop { position: 0.0; color: Qt.rgba(255, 255, 255, 0.8) }
-            GradientStop { position: 1.0; color: Qt.rgba(255, 255, 255, 0.2) }
+            GradientStop { position: 0.0; color: Qt.rgba(1, 1, 1, 0.8) }
+            GradientStop { position: 1.0; color: Qt.rgba(0.8, 0.9, 1, 0.4) }
         }
-        opacity: 0.8
+        opacity: 0.9
         border {
-            color: Qt.rgba(255, 255, 255, 1)
-            width: 2
+            color: Qt.rgba(1, 1, 1, 1)
+            width: 1
         }
     }
 }

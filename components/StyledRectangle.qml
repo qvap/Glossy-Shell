@@ -5,17 +5,13 @@ import Quickshell.Widgets
 import qs.config
 
 /* more cooler aero thingy */
-/* gradient broke gonna fix someday */
 
 Item {
     id: root
     property alias radius: baseRect.radius
 
-    RectangularShadow {
-        anchors.fill: baseRect
-        radius: baseRect.radius
-        blur: 5
-        color: "#182e60"
+    LighterDropShadow {
+        base: baseRect
     }
     Rectangle {
         id: baseRect
@@ -40,26 +36,20 @@ Item {
 
         ClippingRectangle {
             id: gradientClip
-            anchors.fill: parent
-            anchors.bottomMargin: parent.border.width
+            anchors {
+                fill: parent
+                margins: 1 // avoid clipped area exceeding through borders
+            }
             radius: baseRect.radius
             color: "transparent"
             Shape {
-                id: shape
-                anchors.fill: parent
-
-                transform: Scale {
-                    origin.x: root.x + root.width / 2
-                    origin.y: root.y + root.height / 2
-                    xScale: root.width / Config.style.gradients.panel_glow_width
-                    yScale: 1.0
-                }
                 ShapePath {
+                    id: shape
                     strokeWidth: 0
                     fillGradient: RadialGradient {
                         id: gradient
-                        centerX: root.x + root.width / 2
-                        centerY: root.y + root.height
+                        centerX: shape.startX + root.width / 2
+                        centerY: root.height
                         centerRadius: root.height * 0.8
                         focalX: centerX
                         focalY: centerY
@@ -74,9 +64,16 @@ Item {
                     }
 
                     PathRectangle {
-                        width: baseRect.width
-                        height: baseRect.height
+                        width: root.width
+                        height: root.height
                     }
+                }
+
+                transform: Scale {
+                    origin.x: root.width / 2
+                    origin.y: root.height / 2
+                    xScale: root.width / Config.style.gradients.panel_glow_width
+                    yScale: 1.0
                 }
             }
         }

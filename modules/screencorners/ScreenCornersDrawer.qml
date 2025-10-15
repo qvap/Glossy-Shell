@@ -29,7 +29,9 @@ Item {
         Rectangle {
             id: maskInner
 
-            anchors.fill: parent
+            anchors {
+                fill: parent
+            }
             radius: Config.style.rounding.screen_rounding
             }
         }

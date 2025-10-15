@@ -19,7 +19,7 @@ Item {
     required property ShellScreen screen
 
     implicitWidth: 450
-    height: columnLayout.height
+    implicitHeight: columnLayout.implicitHeight
 
     Behavior on implicitHeight {
         BaseAnimation {}
@@ -34,27 +34,15 @@ Item {
             bottom: parent.bottom
         }
 
-        spacing: 10
+        spacing: 14
 
-        height: appList.implicitHeight + searchBackground.implicitHeight + spacing
+        implicitHeight: appList.implicitHeight + searchBackground.implicitHeight + spacing
 
-        StyledListView {
+        AppLauncherList {
             id: appList
-
             Layout.fillWidth: true
             implicitHeight: 200
-
-            spacing: 10
-
-            clip: true
-
-            orientation: Qt.Vertical
-
-            verticalLayoutDirection: ListView.BottomToTop
-
-            model: DesktopEntries.applications.values.filter(a => a.name.toLowerCase().includes(search.text.toLowerCase()))
-            
-            delegate: AppItem {}
+            searchText: search.text
         }
 
         StyledPanelRectangle {
@@ -62,13 +50,14 @@ Item {
 
             Layout.fillWidth: true
 
-            implicitHeight: 60
+            implicitHeight: 45
 
             StyledTextField {
                 id: search
                 
                 anchors {
                     fill: parent
+                    margins: 10
                 }
             
                 Keys.onEscapePressed: {

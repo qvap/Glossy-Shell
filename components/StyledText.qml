@@ -25,14 +25,17 @@ Text {
     Behavior on opacity {
         NumberAnimation {
             duration: 250
-            easing.type: Easing.InOutCubic
+            easing.type: Easing.OutQuart
         }
     }
 
     Behavior on Layout.preferredWidth {
         NumberAnimation {
             duration: 250
-            easing.type: Easing.InOutCubic
+            easing.type: Easing.OutQuart
         }
     }
+
+    layer.enabled: true
+    layer.effect: DropShadow {}
 }

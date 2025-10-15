@@ -31,17 +31,17 @@ Scope {
             id: root
 
             name: "main"
-
+            
             required property ShellScreen modelData
             property list<Region> widgetRegions: [
                 /* could be better with dynamic list appends
                 and reactive bindings, but I have no budget
                 for this */
                 Region {
-                    item: applauncher
+                    item: bar
                 },
                 Region {
-                    item: bar
+                    item: applauncher
                 }
             ]
 
@@ -68,7 +68,7 @@ Scope {
 
             ContainerWindow { // exclusion zone for bar
                 name: "bar_exclusion"
-                exclusiveZone: Config.style.barstyle.bar_chunkiness - 6
+                exclusiveZone: Global.barOpen ? Config.style.barstyle.bar_chunkiness * 0.9 : 0
                 implicitWidth: 1
                 implicitHeight: 1
                 mask: Region {}
@@ -77,20 +77,21 @@ Scope {
                 }
             }
 
-            StyledPanelRectangle {
-                x: 1400
-                y: 50
-
-                width: 400
-                height: 400
-            }
-
             Bar {id: bar} // decided to move it to main window so I can do more stuff :3
 
             AppLauncherWrapper {
                 id: applauncher
-                screen: modelData
+                screen: modelData  
             }
+        }
+    }
+
+    GlobalShortcut {
+        appid: "glossy"
+        name: "toggle_launcher"
+        description: "Open / Close the App Launcher"
+        onPressed: {
+            Global.launcherOpen = !Global.launcherOpen
         }
     }
 }

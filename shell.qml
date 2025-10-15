@@ -1,5 +1,6 @@
 //@ pragma Env QS_NO_RELOAD_POPUP=1
 //@ pragma Env QSG_RENDER_LOOP=threaded
+//@ pragma IconTheme oxylite
 
 import QtQuick
 import QtQuick.Shapes
@@ -19,7 +20,10 @@ import qs.modules.screencorners
 /* bye! */
 
 ShellRoot {
-  LazyLoader {active: true; component: ScreenCorners{}}
+    LazyLoader {
+        active: true
+        component: ScreenCorners {}
+    }
 
-  MainWindow {}
+    MainWindow {}
 }

@@ -6,4 +6,6 @@ import QtQuick.Effects
 MultiEffect {
     shadowEnabled: true
     shadowVerticalOffset: 5
+    shadowOpacity: 0.8
+    shadowColor: "#002232"
 }

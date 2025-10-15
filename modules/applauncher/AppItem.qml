@@ -10,8 +10,9 @@ Item {
     id: root
 
     required property DesktopEntry modelData
+    property int blurEffect: 0
 
-    implicitHeight: 60
+    implicitHeight: 46
     implicitWidth: parent ? parent.width : 200
 
     StyledPanelRectangle {
@@ -35,33 +36,24 @@ Item {
 
         IconImage {
             source: Quickshell.iconPath(modelData.icon, "image-missing")
-            implicitSize: 32
+            implicitSize: 28
         }
 
-        ColumnLayout {
-            Layout.alignment: Qt.AlignVCenter
-
-            spacing: 2
-
-            StyledText {
-                text: modelData.name
-                font.pixelSize: 18
-                color: "white"
-            }
-
-            Loader {
-                active: modelData.comment !== ""
-
-                sourceComponent: StyledText {
-                    width: 370
-                    text: modelData.comment
-                    font.pixelSize: 12
-                    color: "#bbbbbb"
-                }
-            }
-
-            
+        StyledText {
+            text: modelData.name
+            font.pixelSize: 18
+            color: "white"
         }
 
+        /*Loader {
+            active: modelData.comment !== ""
+
+            sourceComponent: StyledText {
+                width: 370
+                text: modelData.comment
+                font.pixelSize: 12
+                color: "#bbbbbb"
+            }
+        }*/
     }
 }

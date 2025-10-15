@@ -10,7 +10,7 @@ JsonObject {
     property Fonts fonts: Fonts {}
 
     component Rounding: JsonObject {
-        property int rounding: 24 // Shell-wise rounding
+        property int rounding: 16 // Shell-wise rounding
         property int screen_rounding: 15 // Rounding for corners of the screen
     }
 

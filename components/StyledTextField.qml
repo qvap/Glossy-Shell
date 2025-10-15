@@ -8,7 +8,7 @@ TextField {
     id: root
 
     color: "#ffffff"
-    placeholderTextColor: "#bfbfbf"
+    placeholderTextColor: "#d6d6d6"
 
     font {
         family: Config.style.fonts.sans

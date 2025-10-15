@@ -5,6 +5,7 @@ import qs.components
 import qs.components.containers
 import qs.config
 import qs.modules
+import qs
 
 /* you should delete your computer now */
 
@@ -15,7 +16,7 @@ Item {
         right: parent?.right
     }
 
-    implicitHeight: Config.style.barstyle.bar_chunkiness
+    implicitHeight: Global.barOpen ? Config.style.barstyle.bar_chunkiness : 0
 
     BarContent {
         anchors {

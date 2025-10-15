@@ -23,6 +23,9 @@ Item {
 
     clip: true
 
+    layer.enabled: true
+    layer.effect: DropShadow {}
+
     SequentialAnimation {
         id: show
         running: false
@@ -34,24 +37,42 @@ Item {
             }
         }
         PauseAnimation { duration: 100 }
-        BaseAnimation {
-            duration: 400
-            easing.type: Easing.OutQuart
-            target: root
-            property: "implicitHeight"
-            to: launcher.implicitWidth
+        ParallelAnimation {
+            BaseAnimation {
+                duration: 400
+                easing.type: Easing.OutQuart
+                target: root
+                property: "implicitHeight"
+                to: launcher.implicitHeight
+            }
+            BaseAnimation {
+                duration: 400
+                easing.type: Easing.OutQuart
+                target: root
+                property: "implicitWidth"
+                to: launcher.implicitWidth
+            }
         }
     }
 
     SequentialAnimation {
         id: hide
         running: false
-        BaseAnimation {
-            duration: 400
-            easing.type: Easing.OutQuart
-            target: root
-            property: "implicitHeight"
-            to: 0
+        ParallelAnimation {
+            BaseAnimation {
+                duration: 400
+                easing.type: Easing.OutQuart
+                target: root
+                property: "implicitHeight"
+                to: 0
+            }
+            BaseAnimation {
+                duration: 400
+                easing.type: Easing.OutQuart
+                target: root
+                property: "implicitWidth"
+                to: 0
+            }
         }
         ScriptAction {
             script: {
@@ -60,10 +81,10 @@ Item {
             }
         }
     }
-
+    
     anchors {
         bottom: parent.bottom
-        bottomMargin: 60
+        bottomMargin: Config.style.barstyle.bar_chunkiness * 1.2
         horizontalCenter: parent.horizontalCenter
     }
 
@@ -97,15 +118,6 @@ Item {
         target: "launcher"
 
         function toggle() {
-            Global.launcherOpen = !Global.launcherOpen
-        }
-    }
-
-    GlobalShortcut {
-        appid: "glossy"
-        name: "toggle_launcher"
-        description: "Open / Close the App Launcher"
-        onPressed: {
             Global.launcherOpen = !Global.launcherOpen
         }
     }
