@@ -48,7 +48,7 @@ Item {
                     strokeWidth: 0
                     fillGradient: RadialGradient {
                         id: gradient
-                        centerX: shape.startX + root.width / 2
+                        centerX: root.width / 2
                         centerY: root.height
                         centerRadius: root.height * 0.8
                         focalX: centerX

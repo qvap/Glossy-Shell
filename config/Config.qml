@@ -9,6 +9,8 @@ Singleton {
     id: root
 
     property alias style: adapter.style
+    property alias animation: adapter.animation
+    property alias workspace: adapter.workspace
 
     FileView {
         path: "config.json"
@@ -20,7 +22,9 @@ Singleton {
 
         JsonAdapter {
             id: adapter
-            property Style style: Style {}
+            property StyleConf style: StyleConf {}
+            property AnimationConf animation: AnimationConf {}
+            property WorkspaceConf workspace: WorkspaceConf {}
         }
     }
 }

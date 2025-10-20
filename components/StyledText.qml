@@ -19,7 +19,7 @@ Text {
     font {
         hintingPreference: Font.PreferFullHinting
         family: Config.style.fonts.sans
-        pixelSize: 18
+        pixelSize: Config.style.fonts.standartSize
     }
 
     Behavior on opacity {

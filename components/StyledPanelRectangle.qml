@@ -11,6 +11,7 @@ Item {
     id: root
 
     property alias color: base.color
+    property alias radius: base.radius
 
     /*LighterDropShadow {
         base: base

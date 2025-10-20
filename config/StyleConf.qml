@@ -3,7 +3,6 @@ import Quickshell.Io
 /* organizes stuff for usage */
 
 JsonObject {
-    property EasingCurves curves: EasingCurves {}
     property Rounding rounding: Rounding {}
     property BarStyle barstyle: BarStyle {}
     property Gradients gradients: Gradients {}
@@ -25,12 +24,13 @@ JsonObject {
         property real panel_glow_width: 50.0 // Width of the glow effect on panels
     }
 
-    component EasingCurves: JsonObject {
-        property list<real> bubblyWidth: [0.3, 0, 0.8, 0.15, 1, 1]
-        property list<real> bubblyHeight: [0.3, 0, 0.8, 0.15, 1, 1]
-    }
     component Fonts: JsonObject {
         property string sans: "Noto Sans"
         property string icons: "Material Symbols Rounded"
+        property real verySmallSize: 6.88
+        property real smallSize: 11.12
+        property real standartSize: 18.0
+        property real largeSize: 29.0
+        property real veryLargeSize: 47.0
     }
 }

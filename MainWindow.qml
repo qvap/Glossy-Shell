@@ -82,6 +82,7 @@ Scope {
             AppLauncherWrapper {
                 id: applauncher
                 screen: modelData  
+                focusState: focusGrab.active
             }
         }
     }

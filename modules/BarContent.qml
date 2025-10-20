@@ -40,6 +40,10 @@ Item {
             horizontalCenter: parent.horizontalCenter
         }
         spacing: 4
+
+        WorkspacesWidget {
+            Layout.alignment: Qt.AlignVCenter
+        }
     }
 
     RowLayout {
@@ -51,7 +55,7 @@ Item {
             right: parent.right
             rightMargin: 1
         }
-        spacing: 5
+        spacing: -5
         layoutDirection: Qt.RightToLeft
 
         BarGroup {
@@ -59,6 +63,15 @@ Item {
             Layout.alignment: Qt.AlignVCenter
 
             ClockWidget {
+                Layout.alignment: Qt.AlignVCenter
+            }
+        }
+
+        BarGroup {
+            id: batteryGroup
+            Layout.alignment: Qt.AlignVCenter
+
+            BatteryWidget {
                 Layout.alignment: Qt.AlignVCenter
             }
         }

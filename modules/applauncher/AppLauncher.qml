@@ -17,6 +17,7 @@ Item {
     id: root
     
     required property ShellScreen screen
+    required property bool focusState
 
     implicitWidth: 450
     implicitHeight: columnLayout.implicitHeight
@@ -59,10 +60,6 @@ Item {
                     fill: parent
                     margins: 10
                 }
-            
-                Keys.onEscapePressed: {
-                    Global.launcherOpen = false
-                }
             }
         }
     }
@@ -85,6 +82,37 @@ Item {
             GradientStop { position: 0.0; color: Qt.rgba(0, 0, 0, 0) }
             GradientStop { position: 0.2; color: Qt.rgba(0, 0, 0, 1) }
         }
+    }
+
+    Connections {
+        target: root
+        function onFocusStateChanged() {
+            if (!root.focusState) {
+                Global.launcherOpen = false;
+            }
+        }
+    }
+
+    Keys.onPressed: (event) => {
+        switch (event.key) {
+            case Qt.Key_Escape:
+                Global.launcherOpen = false;
+                break;
+            case Qt.Key_Up:
+                appList.incrementCurrentIndex();
+                break;
+            case Qt.Key_Down:
+                appList.decrementCurrentIndex();
+                break;
+            case Qt.Key_Return || Qt.Key_Enter():
+                appList.execute();
+                Global.launcherOpen = false;
+                break;
+            default:
+                event.accepted = false;
+                return;
+        }
+        event.accepted = true;
     }
 
     Component.onCompleted: {
