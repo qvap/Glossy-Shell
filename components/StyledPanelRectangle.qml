@@ -10,7 +10,7 @@ import qs.components
 Item {
     id: root
 
-    property alias color: base.color
+    property color mainColor: Colors.primary
     property alias radius: base.radius
 
     /*LighterDropShadow {
@@ -32,12 +32,12 @@ Item {
         }
         radius: Config.style.rounding.rounding
         gradient: Gradient {
-            GradientStop { position: 0.0; color: Qt.rgba(1, 1, 1, 0.8) }
-            GradientStop { position: 1.0; color: Qt.rgba(0.8, 0.9, 1, 0.4) }
+            GradientStop { position: 0.0; color: Qt.hsla(root.mainColor.hslHue, root.mainColor.hslSaturation, 0.95, 1.0) }
+            GradientStop { position: 1.0; color: Qt.hsla(root.mainColor.hslHue, root.mainColor.hslSaturation, 0.95, 0.4) }
         }
         opacity: 0.9
         border {
-            color: Qt.rgba(1, 1, 1, 1)
+            color: Qt.lighter(root.mainColor, 2.0)
             width: 1
         }
     }

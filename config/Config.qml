@@ -13,7 +13,7 @@ Singleton {
     property alias workspace: adapter.workspace
 
     FileView {
-        path: "config.json"
+        path: Quickshell.shellDir + "/userconfig/config.json"
 
         watchChanges: true
         onFileChanged: reload()

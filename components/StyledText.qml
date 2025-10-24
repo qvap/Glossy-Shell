@@ -19,13 +19,13 @@ Text {
     font {
         hintingPreference: Font.PreferFullHinting
         family: Config.style.fonts.sans
-        pixelSize: Config.style.fonts.standartSize
+        pixelSize: Config.style.fonts.largeSize
     }
 
     Behavior on opacity {
         NumberAnimation {
             duration: 250
-            easing.type: Easing.OutQuart
+            easing.type: Easing.OutCirc
         }
     }
 

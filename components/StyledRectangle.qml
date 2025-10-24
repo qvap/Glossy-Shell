@@ -8,6 +8,8 @@ import qs.config
 
 Item {
     id: root
+
+    property color mainColor: Colors.primary
     property alias radius: baseRect.radius
 
     LighterDropShadow {
@@ -22,11 +24,11 @@ Item {
         gradient: LinearGradient {
             GradientStop {
                 position: 0.0
-                color: "#b2c5ff"
+                color: Qt.lighter(root.mainColor, 1.8)
             }
             GradientStop {
                 position: 0.8
-                color: "#182e60"
+                color: Qt.darker(root.mainColor, 7.0)
             }
         }
         antialiasing: true
@@ -55,7 +57,7 @@ Item {
                         focalY: centerY
                         GradientStop {
                             position: 0.2
-                            color: Qt.rgba(0, 183, 255, 1)
+                            color: Qt.lighter(root.mainColor, 1.5)
                         }
                         GradientStop {
                             position: 1.0
@@ -81,7 +83,7 @@ Item {
             id: borderRect
             anchors.fill: parent
             color: "transparent"
-            border.color: "#1d3d88"
+            border.color: Qt.darker(root.mainColor, 4.0)
             radius: baseRect.radius
             border.width: 2
             border.pixelAligned: true

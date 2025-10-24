@@ -3,13 +3,7 @@
 //@ pragma IconTheme oxylite
 
 import QtQuick
-import QtQuick.Shapes
 import Quickshell
-import qs.components
-import qs.config
-import qs.services
-import qs.modules
-import qs.modules.applauncher
 import qs.modules.screencorners
 
 /* why hello there!

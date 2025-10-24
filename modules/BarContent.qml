@@ -75,5 +75,14 @@ Item {
                 Layout.alignment: Qt.AlignVCenter
             }
         }
+
+        BarGroup {
+            id: volumeGroup
+            Layout.alignment: Qt.AlignVCenter
+
+            VolumeWidget {
+                Layout.alignment: Qt.AlignVCenter
+            }
+        }
     }
 }

@@ -1,0 +1,5 @@
+{
+  "colors": {
+    "primary": "{{colors.primary.default.hex | set_lightness: -30.0}}"
+  }
+}

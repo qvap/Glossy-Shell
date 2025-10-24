@@ -17,7 +17,7 @@ Item {
     property bool hovered: false
 
     Timer {
-        id:hoverTimer
+        id: hoverTimer
         onTriggered: {
             root.hovered = false;
         }
@@ -29,9 +29,9 @@ Item {
         onEntered: root.hovered = true
         onExited: {
             if (hoverTimer.running) {
-                hoverTimer.stop()
+                hoverTimer.stop();
             }
-            hoverTimer.start()
+            hoverTimer.start();
         }
     }
 
@@ -40,13 +40,13 @@ Item {
         anchors.centerIn: parent
         spacing: 0
 
+        clip: true
+
         StyledText {
             wrapping: false
             font.bold: true
             color: "white"
-            text: DateTime.shortDate
-            opacity: hovered ? 1 : 0
-            Layout.preferredWidth: hovered ? implicitWidth : 0
+            text: DateTime.time
         }
 
         StyledText {
@@ -54,15 +54,17 @@ Item {
             font.bold: true
             color: "white"
             text: "  ✧  "
-            opacity: hovered ? 1 : 0
-            Layout.preferredWidth: hovered ? implicitWidth : 0
+            opacity: root.hovered ? 1 : 0
+            Layout.preferredWidth: root.hovered ? implicitWidth : 0
         }
-    
+
         StyledText {
             wrapping: false
             font.bold: true
             color: "white"
-            text: DateTime.time
+            text: DateTime.shortDate
+            opacity: root.hovered ? 1 : 0
+            Layout.preferredWidth: root.hovered ? implicitWidth : 0
         }
     }
 }

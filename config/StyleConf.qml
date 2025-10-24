@@ -9,7 +9,7 @@ JsonObject {
     property Fonts fonts: Fonts {}
 
     component Rounding: JsonObject {
-        property int rounding: 16 // Shell-wise rounding
+        property int rounding: 18 // Shell-wise rounding
         property int screen_rounding: 15 // Rounding for corners of the screen
     }
 
@@ -25,12 +25,14 @@ JsonObject {
     }
 
     component Fonts: JsonObject {
+        property real scale: 1.2
+        property real iconScale: 1.4
         property string sans: "Noto Sans"
         property string icons: "Material Symbols Rounded"
-        property real verySmallSize: 6.88
-        property real smallSize: 11.12
-        property real standartSize: 18.0
-        property real largeSize: 29.0
-        property real veryLargeSize: 47.0
+        property int verySmallSize: 11 * scale
+        property int smallSize: 12 * scale
+        property int standartSize: 13 * scale
+        property int largeSize: 15 * scale
+        property int veryLargeSize: 18 * scale
     }
 }

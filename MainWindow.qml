@@ -31,7 +31,7 @@ Scope {
             id: root
 
             name: "main"
-            
+
             required property ShellScreen modelData
             property list<Region> widgetRegions: [
                 /* could be better with dynamic list appends
@@ -81,7 +81,7 @@ Scope {
 
             AppLauncherWrapper {
                 id: applauncher
-                screen: modelData  
+                screen: modelData
                 focusState: focusGrab.active
             }
         }

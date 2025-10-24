@@ -16,7 +16,7 @@ Item {
         anchors {
             centerIn: parent
         }
-        spacing: 40
+        spacing: 20
 
         Repeater {
             id: repeater
@@ -27,8 +27,8 @@ Item {
 
             delegate: StyledPanelRectangle {
                 required property int index
-                width: 10
-                height: 10
+                width: 20
+                height: 20
             }
         }
     }

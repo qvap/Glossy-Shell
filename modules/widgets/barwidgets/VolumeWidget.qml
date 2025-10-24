@@ -1,7 +1,20 @@
+/*CircleProgress {
+    anchors {
+        centerIn: parent
+    }
+    value: 0.5
+
+    MaterialIcon {
+        anchors {
+            centerIn: parent
+        }
+        text: "volume_up"
+    }
+}*/
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Services.UPower
+import Quickshell.Services.Pipewire
 import qs.config
 import qs.services
 import qs.components
@@ -14,7 +27,7 @@ Item {
     implicitHeight: Config.style.barstyle.bar_chunkiness - padding * 2
 
     property bool hovered: false
-    readonly property bool charging: UPower.displayDevice.state === UPowerDeviceState.Charging
+    property int translatedVolume: Math.round(Audio.defaultSinkVolume * 100)
 
     Timer {
         id: hoverTimer
@@ -23,48 +36,28 @@ Item {
         }
     }
 
-    readonly property var batteryIcons: [
+    readonly property var volumeIcons: [
         {
-            "level": 5,
-            "icon": "battery_android_alert"
+            "level": 1,
+            "icon": "volume_mute"
         },
         {
-            "level": 20,
-            "icon": "battery_android_frame_1"
+            "level": 80,
+            "icon": "volume_down"
         },
         {
-            "level": 30,
-            "icon": "battery_android_frame_2"
-        },
-        {
-            "level": 40,
-            "icon": "battery_android_frame_3"
-        },
-        {
-            "level": 50,
-            "icon": "battery_android_frame_4"
-        },
-        {
-            "level": 70,
-            "icon": "battery_android_frame_5"
-        },
-        {
-            "level": 90,
-            "icon": "battery_android_frame_6"
-        },
-        {
-            "level": 101,
-            "icon": "battery_android_frame_full"
+            "level": 100,
+            "icon": "volume_up"
         }
     ]
 
-    function getBatteryIcon(percentage) {
-        for (const item of batteryIcons) {
+    function getVolumeIcon(percentage) {
+        for (const item of volumeIcons) {
             if (percentage < item.level) {
                 return item.icon;
             }
         }
-        return batteryIcons[batteryIcons.length - 1].icon;
+        return volumeIcons[volumeIcons.length - 1].icon;
     }
 
     MouseArea {
@@ -76,7 +69,7 @@ Item {
         }
     }
 
-    onChargingChanged: {
+    onTranslatedVolumeChanged: {
         root.hovered = true;
         startTimer();
     }
@@ -96,7 +89,8 @@ Item {
         clip: true
 
         MaterialIcon {
-            text: (UPower.displayDevice.isLaptopBattery && !charging) ? getBatteryIcon(Math.round(UPower.displayDevice.percentage * 100)) : "water_ec"
+            discretSize: -1.0 // stupid misalignment
+            text: Audio.defaultSinkMuted ? "volume_off" : getVolumeIcon(translatedVolume)
             color: "white"
             Layout.alignment: Qt.AlignVCenter || Qt.AlignHCenter
         }
@@ -105,18 +99,18 @@ Item {
             wrapping: false
             font.bold: true
             color: "white"
-            text: "  ✧  "
-            opacity: hovered ? 1 : 0
-            Layout.preferredWidth: hovered ? implicitWidth : 0
+            text: "  ✧   "
+            opacity: root.hovered ? 1 : 0
+            Layout.preferredWidth: root.hovered ? implicitWidth : 0
         }
 
         StyledText {
             wrapping: false
             font.bold: true
             color: "white"
-            text: (UPower.displayDevice.isLaptopBattery) ? Math.round(UPower.displayDevice.percentage * 100) + "%" : "😝"
-            opacity: hovered ? 1 : 0
-            Layout.preferredWidth: hovered ? implicitWidth : 0
+            text: translatedVolume
+            opacity: root.hovered ? 1 : 0
+            Layout.preferredWidth: root.hovered ? implicitWidth : 0
         }
     }
 }
