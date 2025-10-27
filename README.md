@@ -8,7 +8,7 @@ A promised future for your desktop
   
 ![Arch](https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff&style=for-the-badge) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
-![Версия проекта](https://img.shields.io/badge/version-1.0.0-blue) ![Статус сборки](https://img.shields.io/badge/build-passing-brightgreen) ![Лицензия](https://img.shields.io/badge/license-MIT-green) ![Открытые issues](https://img.shields.io/github/issues/qvap/glossy-shell) ![Форки](https://img.shields.io/github/forks/qvap/glossy-shell) ![Звезды](https://img.shields.io/github/stars/qvap/glossy-shell)
+![Версия проекта](https://img.shields.io/badge/version-0.0.1-blue) ![Статус сборки](https://img.shields.io/badge/build-passing-brightgreen) ![Лицензия](https://img.shields.io/badge/license-MIT-green) ![Открытые issues](https://img.shields.io/github/issues/qvap/glossy-shell) ![Форки](https://img.shields.io/github/forks/qvap/glossy-shell) ![Звезды](https://img.shields.io/github/stars/qvap/glossy-shell)
 
 </h3>
 
