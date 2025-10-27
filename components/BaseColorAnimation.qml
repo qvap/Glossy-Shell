@@ -3,5 +3,5 @@ import QtQuick
 /* and this one too */
 
 ColorAnimation {
-    duration: 500
+    duration: Config.animation.duration.normal
 }

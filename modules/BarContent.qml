@@ -18,7 +18,7 @@ Item {
     StyledRectangle {
         id: barBackground
         anchors.fill: parent
-        radius: Config.style.barstyle.floating_bar ? Config.style.rounding.rounding : 0
+        radius: Config.style.barstyle.floating_bar ? Config.style.rounding.small : 0
     }
 
     RowLayout {

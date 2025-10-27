@@ -4,6 +4,7 @@ import QtQuick
 import Quickshell
 import qs.components
 import qs.config
+import "../../scripts/fuzzysearch.js" as Fuzzy
 
 StyledListView {
     id: root
@@ -31,19 +32,19 @@ StyledListView {
     }
 
     displaced: Transition {
-        BaseAnimation { property: "y"; easing.type: Easing.OutCubic; duration: Config.animation.durations.durationMedium }
+        BaseAnimation { property: "y"; easing.type: Easing.OutCubic; duration: Config.animation.duration.normal }
     }
 
     addDisplaced: Transition {
-        BaseAnimation { property: "y"; easing.type: Easing.OutCubic; duration: Config.animation.durations.durationMedium }
+        BaseAnimation { property: "y"; easing.type: Easing.OutCubic; duration: Config.animation.duration.normal }
     }
     
     remove: Transition {
-        BaseAnimation { properties: "opacity,scale"; to: 0; easing.type: Easing.OutCubic; duration: Config.animation.durations.durationMedium }
+        BaseAnimation { properties: "opacity,scale"; to: 0; easing.type: Easing.OutCubic; duration: Config.animation.duration.normal }
     }
 
     add: Transition {
-        BaseAnimation { properties: "opacity,scale"; to: 1; easing.type: Easing.OutCubic; duration: Config.animation.durations.durationMedium }
+        BaseAnimation { properties: "opacity,scale"; to: 1; easing.type: Easing.OutCubic; duration: Config.animation.duration.normal }
     }
 
     model: ScriptModel {
@@ -54,7 +55,7 @@ StyledListView {
     delegate: AppItem { onItemClicked: (itemIndex) => { root.currentIndex = itemIndex } }
 
     function getSearchApps(searchText) : list<var> {
-        return (DesktopEntries.applications.values.filter(a => a.name.toLowerCase().includes(searchText.toLowerCase()))).sort((a, b) => a.name.localeCompare(b.name))
+        return (DesktopEntries.applications.values.filter(a => Fuzzy.fuzzy_search(a.name, searchText))).sort((a, b) => a.name.localeCompare(b.name))
     }
 
     function execute() {

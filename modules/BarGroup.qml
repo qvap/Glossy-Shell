@@ -15,7 +15,7 @@ Item {
 
     StyledRectangle {
         id: background
-        radius: Config.style.rounding.rounding * 0.8
+        radius: Config.style.rounding.small * 0.8
         anchors {
             fill: parent
             margins: Config.style.barstyle.bar_group_margin

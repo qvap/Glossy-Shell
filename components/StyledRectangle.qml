@@ -20,7 +20,7 @@ Item {
         anchors.fill: parent
         color: "black"
 
-        radius: Config.style.rounding.rounding
+        radius: Config.style.rounding.normal
         gradient: LinearGradient {
             GradientStop {
                 position: 0.0

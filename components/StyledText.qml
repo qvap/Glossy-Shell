@@ -24,14 +24,14 @@ Text {
 
     Behavior on opacity {
         NumberAnimation {
-            duration: 250
+            duration: Config.animation.duration.small
             easing.type: Easing.OutCirc
         }
     }
 
     Behavior on Layout.preferredWidth {
         NumberAnimation {
-            duration: 250
+            duration: Config.animation.duration.small
             easing.type: Easing.OutQuart
         }
     }

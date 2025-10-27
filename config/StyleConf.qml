@@ -7,10 +7,15 @@ JsonObject {
     property BarStyle barstyle: BarStyle {}
     property Gradients gradients: Gradients {}
     property Fonts fonts: Fonts {}
+    property Spacing spacing: Spacing {}
+    property Padding padding: Padding {}
 
     component Rounding: JsonObject {
-        property int rounding: 18 // Shell-wise rounding
-        property int screen_rounding: 15 // Rounding for corners of the screen
+        property real scale: 1.2
+        property int small: 12 * scale
+        property int normal: 17 * scale
+        property int large: 25 * scale
+        property int veryLarge: 1000 * scale
     }
 
     component BarStyle: JsonObject {
@@ -34,5 +39,23 @@ JsonObject {
         property int standartSize: 13 * scale
         property int largeSize: 15 * scale
         property int veryLargeSize: 18 * scale
+    }
+
+    component Spacing: JsonObject {
+        property real scale: 1.2
+        property int verySmall: 7 * scale
+        property int small: 10 * scale
+        property int standart: 12 * scale
+        property int large: 15 * scale
+        property int veryLarge: 20 * scale
+    }
+
+    component Padding: JsonObject {
+        property real scale: 1.2
+        property int verySmall: 5 * scale
+        property int small: 7 * scale
+        property int standart: 10 * scale
+        property int large: 12 * scale
+        property int veryLarge: 15 * scale
     }
 }

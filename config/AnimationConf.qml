@@ -4,7 +4,7 @@ import Quickshell.Io
 
 JsonObject {
     property EasingCurves curves: EasingCurves {}
-    property Durations durations: Durations {}
+    property Duration duration: Duration {}
 
     component EasingCurves: JsonObject {
         property list<real> bubblyWidth: [0.23, 1.76, 0.05, 1.00, 1, 1]
@@ -21,11 +21,11 @@ JsonObject {
         property list<real> expressiveEffects: [0.34, 0.8, 0.34, 1, 1, 1]
     }
 
-    component Durations: JsonObject {
-        property int durationVeryShort: 100
-        property int durationShort: 200
-        property int durationMedium: 400
-        property int durationLong: 600
-        property int durationVeryLong: 900
+    component Duration: JsonObject {
+        property int verySmall: 100
+        property int small: 200
+        property int normal: 400
+        property int large: 600
+        property int veryLarge: 900
     }
 }

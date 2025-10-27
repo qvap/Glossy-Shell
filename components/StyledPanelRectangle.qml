@@ -20,9 +20,9 @@ Item {
         anchors {
             fill: parent
         }
-        color: "#00364f"
-        radius: Config.style.rounding.rounding
-        opacity: 0
+        color: Qt.darker(root.mainColor, 3.0)
+        radius: Config.style.rounding.normal
+        opacity: 0.6
     }
 
     Rectangle {
@@ -30,7 +30,7 @@ Item {
         anchors {
             fill: parent
         }
-        radius: Config.style.rounding.rounding
+        radius: Config.style.rounding.normal
         gradient: Gradient {
             GradientStop { position: 0.0; color: Qt.hsla(root.mainColor.hslHue, root.mainColor.hslSaturation, 0.95, 1.0) }
             GradientStop { position: 1.0; color: Qt.hsla(root.mainColor.hslHue, root.mainColor.hslSaturation, 0.95, 0.4) }

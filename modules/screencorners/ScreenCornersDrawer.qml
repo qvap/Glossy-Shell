@@ -32,7 +32,7 @@ Item {
             anchors {
                 fill: parent
             }
-            radius: Config.style.rounding.screen_rounding
+            radius: Config.style.rounding.normal
             }
         }
     }

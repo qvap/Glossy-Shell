@@ -51,7 +51,7 @@ Item {
         }
         ParallelAnimation {
             NumberAnimation {
-                duration: Config.animation.durations.durationVeryLong
+                duration: Config.animation.duration.veryLarge
                 easing.type: BezierSpline
                 easing.bezierCurve: Config.animation.curves.bubblyHeight
                 target: scaleTransform
@@ -59,7 +59,7 @@ Item {
                 to: 1.0
             }
             NumberAnimation {
-                duration: Config.animation.durations.durationVeryLong
+                duration: Config.animation.duration.veryLarge
                 easing.type: BezierSpline
                 easing.bezierCurve: Config.animation.curves.bubblyWidth
                 target: scaleTransform
@@ -67,7 +67,7 @@ Item {
                 to: 1.0
             }
             NumberAnimation {
-                duration: Config.animation.durations.durationVeryLong
+                duration: Config.animation.duration.veryLarge
                 easing.type: BezierSpline
                 easing.bezierCurve: Config.animation.curves.bubblyWidth
                 target: root
@@ -75,7 +75,7 @@ Item {
                 to: implicitBottomMargin
             }
             BaseAnimation {
-                duration: Config.animation.durations.durationShort
+                duration: Config.animation.duration.small
                 easing.type: Easing.OutQuart
                 target: root
                 property: "opacity"
@@ -94,28 +94,28 @@ Item {
         }
         ParallelAnimation {
             BaseAnimation {
-                duration: Config.animation.durations.durationMedium
+                duration: Config.animation.duration.normal
                 easing.type: Easing.OutQuart
                 target: scaleTransform
                 property: "xScale"
                 to: 0.0
             }
             BaseAnimation {
-                duration: Config.animation.durations.durationMedium
+                duration: Config.animation.duration.normal
                 easing.type: Easing.OutQuart
                 target: scaleTransform
                 property: "yScale"
                 to: 0.0
             }
             BaseAnimation {
-                duration: Config.animation.durations.durationMedium
+                duration: Config.animation.duration.normal
                 easing.type: Easing.OutQuart
                 target: root
                 property: "anchors.bottomMargin"
                 to: implicitHiddenMargin
             }
             BaseAnimation {
-                duration: Config.animation.durations.durationMedium
+                duration: Config.animation.duration.normal
                 easing.type: Easing.OutQuart
                 target: root
                 property: "opacity"

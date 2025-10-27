@@ -8,7 +8,6 @@ import Quickshell.Hyprland
 import Quickshell.Widgets
 import qs
 import qs.components
-import qs.config
 import qs.services
 
 /* cool! why so buggy tho */

@@ -12,7 +12,7 @@ TextField {
 
     font {
         family: Config.style.fonts.sans
-        pixelSize: 16
+        pixelSize: Config.style.fonts.largeSize
     }
 
     placeholderText: "Search..."
