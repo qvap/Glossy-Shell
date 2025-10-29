@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Widgets
 import qs.components
 import qs
+import qs.config
 
 /* no courage because I can't design aero */
 
@@ -14,7 +15,6 @@ Item {
     required property int index
     property int blurEffect: 0
 
-    implicitHeight: 46
     implicitWidth: parent ? parent.width : 200
 
     signal itemClicked(int itemIndex)
@@ -24,6 +24,13 @@ Item {
         anchors {
             fill: parent
         }
+        radius: root.ListView.isCurrentItem ? Config.style.rounding.small * 0.5 : Config.style.rounding.normal
+
+        Behavior on radius {
+            BaseAnimation {
+                easing.type: Easing.OutQuart
+            }
+        }
     }
 
     MouseArea {
@@ -31,11 +38,11 @@ Item {
             fill: parent
         }
         onClicked: {
-            root.itemClicked(index)
+            root.itemClicked(index);
         }
         onDoubleClicked: {
-            root.execute()
-            Global.launcherOpen = false
+            root.execute();
+            Global.launcherOpen = false;
         }
     }
 
@@ -49,7 +56,7 @@ Item {
             leftMargin: 15
         }
 
-        spacing: 15
+        spacing: Config.style.spacing.large
 
         IconImage {
             source: Quickshell.iconPath(modelData.icon, "image-missing")
@@ -59,7 +66,7 @@ Item {
         StyledText {
             text: modelData.name
             font.pixelSize: 18
-            color: "white"
+            color: root.ListView.isCurrentItem ? Qt.lighter(Colors.primary, 1.6) : "white"
         }
 
         /*Loader {
@@ -75,6 +82,6 @@ Item {
     }
 
     function execute() {
-        modelData.execute()
+        modelData.execute();
     }
 }

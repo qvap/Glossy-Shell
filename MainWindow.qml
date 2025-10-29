@@ -7,7 +7,6 @@ import Quickshell.Hyprland
 import qs.modules.applauncher
 import qs.modules
 import qs.components.containers
-import qs.components
 import qs.config
 
 /* entry point for widgets (you call it drawer or smth)
@@ -66,7 +65,8 @@ Scope {
                 regions: widgetRegions
             }
 
-            ContainerWindow { // exclusion zone for bar
+            ContainerWindow {
+                // exclusion zone for bar
                 name: "bar_exclusion"
                 exclusiveZone: Global.barOpen ? Config.style.barstyle.bar_chunkiness * 0.9 : 0
                 implicitWidth: 1
@@ -77,7 +77,9 @@ Scope {
                 }
             }
 
-            Bar {id: bar} // decided to move it to main window so I can do more stuff :3
+            Bar {
+                id: bar
+            } // decided to move it to main window so I can do more stuff :3
 
             AppLauncherWrapper {
                 id: applauncher
@@ -92,7 +94,7 @@ Scope {
         name: "toggle_launcher"
         description: "Open / Close the App Launcher"
         onPressed: {
-            Global.launcherOpen = !Global.launcherOpen
+            Global.launcherOpen = !Global.launcherOpen;
         }
     }
 }

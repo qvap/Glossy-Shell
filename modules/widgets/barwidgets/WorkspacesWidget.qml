@@ -16,7 +16,7 @@ Item {
         anchors {
             centerIn: parent
         }
-        spacing: 20
+        spacing: Config.style.spacing.veryLarge
 
         Repeater {
             id: repeater

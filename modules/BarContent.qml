@@ -55,7 +55,7 @@ Item {
             right: parent.right
             rightMargin: 1
         }
-        spacing: -5
+        spacing: -7
         layoutDirection: Qt.RightToLeft
 
         BarGroup {
