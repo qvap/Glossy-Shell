@@ -18,10 +18,15 @@ Item {
 
     required property ShellScreen screen
     required property bool focusState
-    property bool wallpaperMode: false
+
+    property bool wallpaperMode: searchText.startsWith('>')
+    readonly property string searchText: search.searchField.text
+    readonly property string filteredText: wallpaperMode ? searchText.substring(1) : searchText
+
     readonly property real maskLength: 0.2
 
     implicitWidth: wallpaperMode ? 600 : 450
+    readonly property int listHeight: 200
     implicitHeight: columnLayout.implicitHeight
 
     Behavior on implicitHeight {
@@ -31,6 +36,37 @@ Item {
     Behavior on implicitWidth {
         BaseAnimation {}
     }
+
+    state: wallpaperMode ? "wallpapers" : "apps"
+
+    states: [
+        State {
+            name: "apps"
+            PropertyChanges {
+                target: appListLoader
+                opacity: 1
+                scale: 1
+            }
+            PropertyChanges {
+                target: wallpaperListLoader
+                opacity: 0
+                scale: 0
+            }
+        },
+        State {
+            name: "wallpapers"
+            PropertyChanges {
+                target: appListLoader
+                opacity: 0
+                scale: 0
+            }
+            PropertyChanges {
+                target: wallpaperListLoader
+                opacity: 1
+                scale: 1
+            }
+        }
+    ]
 
     ColumnLayout {
         id: columnLayout
@@ -43,155 +79,81 @@ Item {
 
         spacing: Config.style.spacing.large
 
-        implicitHeight: listContainer.implicitHeight + searchBackground.implicitHeight + spacing
-
         Item {
-            id: listContainer
             Layout.fillWidth: true
-            implicitHeight: 200
+            implicitHeight: root.listHeight
 
-            property string searchText: search.text
+            property string searchText: search.searchField.text
 
-            Loader {
+            AnimatedLoader {
                 id: appListLoader
                 anchors {
                     fill: parent
                 }
-                asynchronous: false
-
-                opacity: root.wallpaperMode ? 0 : 1
-                scale: root.wallpaperMode ? 0 : 1
-                visible: opacity > 0
 
                 sourceComponent: AppLauncherList {
-                    searchText: listContainer.searchText
+                    searchText: root.filteredText
                     maskLength: root.maskLength
-                }
-
-                Behavior on opacity {
-                    BaseAnimation {}
-                }
-
-                Behavior on scale {
-                    BaseAnimation {}
                 }
             }
 
-            Loader {
+            AnimatedLoader {
                 id: wallpaperListLoader
                 anchors {
                     fill: parent
                 }
-                asynchronous: false
-
-                opacity: root.wallpaperMode ? 1 : 0
-                scale: root.wallpaperMode ? 1 : 0
-                visible: opacity > 0
 
                 sourceComponent: WallpaperLauncherList {
-                    searchText: listContainer.searchText
+                    searchText: root.filteredText
                     maskLength: root.maskLength
                 }
-
-                Behavior on opacity {
-                    BaseAnimation {}
-                }
-
-                Behavior on scale {
-                    BaseAnimation {}
-                }
             }
         }
-
-        StyledPanelRectangle {
-            id: searchBackground
-
+        SearchField {
+            id: search
             Layout.fillWidth: true
 
-            implicitHeight: 45
+            searchField.Keys.forwardTo: [root]
 
-            StyledTextField {
-                id: search
+            icon: root.wallpaperMode ? "wallpaper" : "search"
 
-                anchors {
-                    fill: parent
-                    margins: 10
-                }
-
-                Keys.forwardTo: [root]
-
-                onTextEdited: {
-                    root.wallpaperMode = text.startsWith('>');
-                    listContainer.searchText = text.startsWith('>') ? text.substring(1) : text;
-                }
-            }
-        }
-    }
-
-
-    Connections {
-        target: root
-        function onFocusStateChanged() {
-            if (!root.focusState) {
-                Global.launcherOpen = false;
-            }
+            Component.onCompleted: searchField.forceActiveFocus()
         }
     }
 
     Keys.onPressed: event => {
-        switch (event.key) {
-        case Qt.Key_Escape:
-            Global.launcherOpen = false;
-            break;
-        case Qt.Key_Up:
-            if (!root.wallpaperMode) {
-                appListLoader.item?.incrementCurrentIndex();
-            } else {
-                event.accepted = false;
-                return;
-            }
-            break;
-        case Qt.Key_Down:
-            if (!root.wallpaperMode) {
-                appListLoader.item?.decrementCurrentIndex();
-            } else {
-                event.accepted = false;
-                return;
-            }
-            break;
-        case Qt.Key_Left: {
-            if (root.wallpaperMode) {
-                wallpaperListLoader.item?.decrementCurrentIndex();
-            } else {
-                event.accepted = false;
-                return;
-            }
-            break;
-        }
-        case Qt.Key_Right: {
-            if (root.wallpaperMode) {
-                wallpaperListLoader.item?.incrementCurrentIndex();
-            } else {
-                event.accepted = false;
-                return;
-            }
-            break;
-        }
-        case Qt.Key_Return || Qt.Key_Enter:
-            if (root.wallpaperMode) {
-                wallpaperListLoader.item?.execute();
-            } else {
-                appListLoader.item?.execute();
-            }
-            Global.launcherOpen = false;
-            break;
-        default:
+        const handlers = {
+            [Qt.Key_Escape]: () => Global.launcherOpen = false,
+            [Qt.Key_Up]: () => wallpaperMode ? false : appListLoader.item?.incrementCurrentIndex(),
+            [Qt.Key_Down]: () => wallpaperMode ? false : appListLoader.item?.decrementCurrentIndex(),
+            [Qt.Key_Left]: () => wallpaperMode ? wallpaperListLoader.item?.decrementCurrentIndex() : false,
+            [Qt.Key_Right]: () => wallpaperMode ? wallpaperListLoader.item?.incrementCurrentIndex() : false,
+            [Qt.Key_Return]: () => executeCurrentItem(),
+            [Qt.Key_Enter]: () => executeCurrentItem()
+        };
+
+        const handler = handlers[event.key];
+        if (handler) {
+            const result = handler();
+            event.accepted = result !== false;
+        } else {
             event.accepted = false;
-            return;
         }
-        event.accepted = true;
     }
-    Component.onCompleted: {
-        search.forceActiveFocus();
+
+    function executeCurrentItem() {
+        if (wallpaperMode) {
+            wallpaperListLoader.item?.execute();
+        } else {
+            appListLoader.item?.execute();
+        }
+        Global.launcherOpen = false;
+        return true;
+    }
+
+    onFocusStateChanged: {
+        if (!focusState) {
+            Global.launcherOpen = false;
+        }
     }
 }

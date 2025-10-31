@@ -30,6 +30,10 @@ Item {
             right: middleSection.left
         }
         spacing: 10
+
+        WorkspacesWidget {
+            Layout.alignment: Qt.AlignVCenter
+        }
     }
 
     RowLayout {
@@ -40,10 +44,6 @@ Item {
             horizontalCenter: parent.horizontalCenter
         }
         spacing: 4
-
-        WorkspacesWidget {
-            Layout.alignment: Qt.AlignVCenter
-        }
     }
 
     RowLayout {
@@ -68,6 +68,15 @@ Item {
         }
 
         BarGroup {
+            id: layoutGroup
+            Layout.alignment: Qt.AlignVCenter
+
+            KbLayoutWidget {
+                Layout.alignment: Qt.AlignVCenter
+            }
+        }
+
+        BarGroup {
             id: batteryGroup
             Layout.alignment: Qt.AlignVCenter
 
@@ -81,6 +90,15 @@ Item {
             Layout.alignment: Qt.AlignVCenter
 
             VolumeWidget {
+                Layout.alignment: Qt.AlignVCenter
+            }
+        }
+
+        BarGroup {
+            id: trayGroup
+            Layout.alignment: Qt.AlignVCenter
+
+            TrayWidget {
                 Layout.alignment: Qt.AlignVCenter
             }
         }

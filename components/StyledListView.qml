@@ -10,6 +10,9 @@ ListView {
     maximumFlickVelocity: 3000
 
     rebound: Transition {
-        BaseAnimation { properties: "x,y" }
+        BaseAnimation {
+            properties: "x,y"
+            easing.type: Easing.OutQuad
+        }
     }
 }

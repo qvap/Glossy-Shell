@@ -7,29 +7,18 @@ import qs.config
 
 Item {
     id: root
-    Layout.fillHeight: true
-    readonly property int padding: 15
-    width: row.width + padding * 2
+    readonly property HyprlandMonitor monitor: Hyprland.monitorFor(root.QsWindow.window?.screen)
 
-    RowLayout {
-        id: row
-        anchors {
-            centerIn: parent
+    StyledText {
+        text: `Workspace ${monitor?.activeWorkspace?.id ?? 1}`
+        font {
+            pixelSize: Config.style.fonts.veryLargeSize
         }
-        spacing: Config.style.spacing.veryLarge
-
-        Repeater {
-            id: repeater
-
-            Layout.alignment: Qt.AlignVCenter
-
-            model: Config.workspace.workspace.count
-
-            delegate: StyledPanelRectangle {
-                required property int index
-                width: 20
-                height: 20
-            }
+        color: Qt.lighter(Colors.primary, 1.8)
+        anchors {
+            left: parent.left
+            verticalCenter: parent.verticalCenter
+            leftMargin: Config.style.spacing.standart
         }
     }
 }

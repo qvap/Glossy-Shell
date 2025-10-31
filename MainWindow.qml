@@ -7,6 +7,8 @@ import Quickshell.Hyprland
 import qs.modules.applauncher
 import qs.modules
 import qs.components.containers
+import qs.components
+import qs.services
 import qs.config
 
 /* entry point for widgets (you call it drawer or smth)

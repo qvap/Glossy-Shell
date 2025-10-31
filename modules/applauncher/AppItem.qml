@@ -24,7 +24,7 @@ Item {
         anchors {
             fill: parent
         }
-        radius: root.ListView.isCurrentItem ? Config.style.rounding.small * 0.5 : Config.style.rounding.normal
+        radius: root.ListView.isCurrentItem ? Config.style.rounding.small * 0.5 : Config.style.rounding.large
 
         Behavior on radius {
             BaseAnimation {

@@ -17,6 +17,11 @@ TextField {
 
     placeholderText: "Search..."
 
+    topPadding: 0
+    bottomPadding: 1 // why this stupid field is not centered
+    leftPadding: 0
+    rightPadding: 0
+
     background: Rectangle {
         color: "transparent"
     }

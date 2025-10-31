@@ -1,6 +1,8 @@
 import qs.config
+import QtQuick
 
 StyledText {
+    id: root
     property real discretSize: 0.0
 
     font.family: Config.style.fonts.icons
@@ -9,4 +11,18 @@ StyledText {
             opsz: fontInfo.pixelSize,
             wght: fontInfo.weight
         })
+    onTextChanged: {
+        anim.start();
+    }
+
+    SequentialAnimation {
+        id: anim
+
+        BaseAnimation {
+            target: root
+            property: "opacity"
+            from: 0
+            to: 1
+        }
+    }
 }

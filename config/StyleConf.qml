@@ -15,7 +15,7 @@ JsonObject {
         property int small: 12 * scale
         property int normal: 17 * scale
         property int large: 25 * scale
-        property int veryLarge: 1000 * scale
+        property int full: 1000 * scale
     }
 
     component BarStyle: JsonObject {

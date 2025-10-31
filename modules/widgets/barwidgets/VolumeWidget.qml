@@ -93,6 +93,11 @@ Item {
             text: Audio.defaultSinkMuted ? "volume_off" : getVolumeIcon(translatedVolume)
             color: "white"
             Layout.alignment: Qt.AlignVCenter || Qt.AlignHCenter
+
+            onTextChanged: {
+                root.hovered = true;
+                root.startTimer();
+            }
         }
 
         StyledText {
