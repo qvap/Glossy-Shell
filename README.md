@@ -31,16 +31,31 @@ which makes it possible to create a unique design.
 To setup Glossy Shell on your system, do these steps:
 1. **Install dependecies from AUR**:
     ```sh
-    yay quickshell-git swww
+    yay quickshell-git swww matugen
     ```
     or use another AUR package manager.
 
-2.  **Clone repository to Quickshell folder:**
+2. **Add next code to the matugen config (~/.config/matugen/config.toml)**:
+    ```sh
+    [config]
+    reload_apps = true
+
+    [config.wallpaper]
+    command = "swww"
+    arguments = [ "img", "-t", "fade", "--transition-duration", "0.5", "--transition-step", "255", "--transition-fps", "60", "-f", "Nearest",]
+    set = true
+
+    [templates.glossy]
+    input_path = "~/.config/quickshell/glossy/matugen/template.json"
+    output_path = "~/.config/quickshell/glossy/userconfig/colors.json"
+    ```
+
+3.  **Clone repository to Quickshell folder:**
     ```sh
     cd ~/.config/quickshell && git clone https://github.com/qvap/Glossy-Shell.git
     ```
 
-3.  **Run:**
+4.  **Run:**
     ```sh
     qs -c Glossy-Shell
     ```
