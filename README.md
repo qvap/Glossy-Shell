@@ -31,7 +31,7 @@ which makes it possible to create a unique design.
 To setup Glossy Shell on your system, do these steps:
 1. **Install dependecies from AUR**:
     ```sh
-    yay quickshell-git
+    yay quickshell-git swww
     ```
     or use another AUR package manager.
 
