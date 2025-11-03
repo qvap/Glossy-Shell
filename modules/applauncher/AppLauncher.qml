@@ -43,27 +43,19 @@ Item {
         State {
             name: "apps"
             PropertyChanges {
-                target: appListLoader
-                opacity: 1
-                scale: 1
-            }
-            PropertyChanges {
-                target: wallpaperListLoader
-                opacity: 0
-                scale: 0
+                appListLoader.opacity: 1
+                appListLoader.scale: 1
+                wallpaperListLoader.opacity: 0
+                wallpaperListLoader.scale: 0
             }
         },
         State {
             name: "wallpapers"
             PropertyChanges {
-                target: appListLoader
-                opacity: 0
-                scale: 0
-            }
-            PropertyChanges {
-                target: wallpaperListLoader
-                opacity: 1
-                scale: 1
+                appListLoader.opacity: 0
+                appListLoader.scale: 0
+                wallpaperListLoader.opacity: 1
+                wallpaperListLoader.scale: 1
             }
         }
     ]
@@ -122,12 +114,16 @@ Item {
     }
 
     Keys.onPressed: event => {
-        const handlers = {
+        const handlers = wallpaperMode ? {
             [Qt.Key_Escape]: () => Global.launcherOpen = false,
-            [Qt.Key_Up]: () => wallpaperMode ? false : appListLoader.item?.incrementCurrentIndex(),
-            [Qt.Key_Down]: () => wallpaperMode ? false : appListLoader.item?.decrementCurrentIndex(),
-            [Qt.Key_Left]: () => wallpaperMode ? wallpaperListLoader.item?.decrementCurrentIndex() : false,
-            [Qt.Key_Right]: () => wallpaperMode ? wallpaperListLoader.item?.incrementCurrentIndex() : false,
+            [Qt.Key_Left]: () => wallpaperListLoader.item?.decrementCurrentIndex(),
+            [Qt.Key_Right]: () => wallpaperListLoader.item?.incrementCurrentIndex(),
+            [Qt.Key_Return]: () => executeCurrentItem(),
+            [Qt.Key_Enter]: () => executeCurrentItem()
+        } : {
+            [Qt.Key_Escape]: () => Global.launcherOpen = false,
+            [Qt.Key_Up]: () => appListLoader.item?.incrementCurrentIndex(),
+            [Qt.Key_Down]: () => appListLoader.item?.decrementCurrentIndex(),
             [Qt.Key_Return]: () => executeCurrentItem(),
             [Qt.Key_Enter]: () => executeCurrentItem()
         };

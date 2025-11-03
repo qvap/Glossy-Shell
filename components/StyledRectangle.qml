@@ -24,11 +24,11 @@ Item {
         gradient: LinearGradient {
             GradientStop {
                 position: 0.0
-                color: Qt.lighter(root.mainColor, 1.8)
+                color: Qt.lighter(root.mainColor, Config.style.colorFactors.lightGradientTop)
             }
             GradientStop {
                 position: 0.8
-                color: Qt.darker(root.mainColor, 7.0)
+                color: Qt.darker(root.mainColor, Config.style.colorFactors.darkGradientBottom)
             }
         }
         antialiasing: true
@@ -57,7 +57,7 @@ Item {
                         focalY: centerY
                         GradientStop {
                             position: 0.2
-                            color: Qt.lighter(root.mainColor, 1.5)
+                            color: Qt.lighter(root.mainColor, Config.style.colorFactors.glowLight)
                         }
                         GradientStop {
                             position: 1.0
@@ -83,7 +83,7 @@ Item {
             id: borderRect
             anchors.fill: parent
             color: "transparent"
-            border.color: Qt.darker(root.mainColor, 4.0)
+            border.color: Qt.darker(root.mainColor, Config.style.colorFactors.borderDark)
             radius: baseRect.radius
             border.width: 2
             border.pixelAligned: true

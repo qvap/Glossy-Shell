@@ -6,22 +6,10 @@ import qs.config
 import qs.services
 import qs.components
 
-Item {
+HoverableBarWidget {
     id: root
-    property int padding: 10
-    property bool showDate: Config.style.barstyle.show_date_in_clock_widget
-    implicitWidth: rowLayout.implicitWidth + padding * 2
-    implicitHeight: Config.style.barstyle.bar_chunkiness - padding * 2
 
-    property bool hovered: false
     readonly property bool charging: UPower.displayDevice.state === UPowerDeviceState.Charging
-
-    Timer {
-        id: hoverTimer
-        onTriggered: {
-            root.hovered = false;
-        }
-    }
 
     readonly property var batteryIcons: [
         {
@@ -58,22 +46,9 @@ Item {
         }
     ]
 
-    function getBatteryIcon(percentage) {
-        for (const item of batteryIcons) {
-            if (percentage < item.level) {
-                return item.icon;
-            }
-        }
-        return batteryIcons[batteryIcons.length - 1].icon;
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        hoverEnabled: true
-        onEntered: root.hovered = true
-        onExited: {
-            startTimer();
-        }
+    function getBatteryIcon(percentage) { // should test it
+        const index = Math.min(Math.floor(percentage / 15), batteryIcons.length - 1);
+        return batteryIcons[Math.max(0, index)].icon;
     }
 
     onChargingChanged: {
@@ -81,42 +56,27 @@ Item {
         startTimer();
     }
 
-    function startTimer() {
-        if (hoverTimer.running) {
-            hoverTimer.stop();
-        }
-        hoverTimer.start();
+    MaterialIcon {
+        text: (UPower.displayDevice.isLaptopBattery && !root.charging) ? getBatteryIcon(Math.round(UPower.displayDevice.percentage * 100)) : "water_ec"
+        color: "white"
+        Layout.alignment: Qt.AlignVCenter || Qt.AlignHCenter
     }
 
-    RowLayout {
-        id: rowLayout
-        anchors.centerIn: parent
-        spacing: 0
+    StyledText {
+        wrapping: false
+        font.bold: true
+        color: "white"
+        text: "  ✧  "
+        opacity: root.hovered ? 1 : 0
+        Layout.preferredWidth: root.hovered ? implicitWidth : 0
+    }
 
-        clip: true
-
-        MaterialIcon {
-            text: (UPower.displayDevice.isLaptopBattery && !charging) ? getBatteryIcon(Math.round(UPower.displayDevice.percentage * 100)) : "water_ec"
-            color: "white"
-            Layout.alignment: Qt.AlignVCenter || Qt.AlignHCenter
-        }
-
-        StyledText {
-            wrapping: false
-            font.bold: true
-            color: "white"
-            text: "  ✧  "
-            opacity: hovered ? 1 : 0
-            Layout.preferredWidth: hovered ? implicitWidth : 0
-        }
-
-        StyledText {
-            wrapping: false
-            font.bold: true
-            color: "white"
-            text: (UPower.displayDevice.isLaptopBattery) ? Math.round(UPower.displayDevice.percentage * 100) + "%" : "😝"
-            opacity: hovered ? 1 : 0
-            Layout.preferredWidth: hovered ? implicitWidth : 0
-        }
+    StyledText {
+        wrapping: false
+        font.bold: true
+        color: "white"
+        text: (UPower.displayDevice.isLaptopBattery) ? Math.round(UPower.displayDevice.percentage * 100) + "%" : "😝"
+        opacity: root.hovered ? 1 : 0
+        Layout.preferredWidth: root.hovered ? implicitWidth : 0
     }
 }

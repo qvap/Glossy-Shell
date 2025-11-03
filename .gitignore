@@ -2,3 +2,4 @@ reference/
 .vscode/
 .qmlls.ini
 .github/
+userconfig/*

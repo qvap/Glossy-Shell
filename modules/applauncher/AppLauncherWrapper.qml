@@ -52,7 +52,7 @@ Item {
         ParallelAnimation {
             NumberAnimation {
                 duration: Config.animation.duration.veryLarge
-                easing.type: BezierSpline
+                easing.type: Easing.BezierSpline
                 easing.bezierCurve: Config.animation.curves.bubblyHeight
                 target: scaleTransform
                 property: "xScale"
@@ -60,7 +60,7 @@ Item {
             }
             NumberAnimation {
                 duration: Config.animation.duration.veryLarge
-                easing.type: BezierSpline
+                easing.type: Easing.BezierSpline
                 easing.bezierCurve: Config.animation.curves.bubblyWidth
                 target: scaleTransform
                 property: "yScale"
@@ -68,7 +68,7 @@ Item {
             }
             NumberAnimation {
                 duration: Config.animation.duration.veryLarge
-                easing.type: BezierSpline
+                easing.type: Easing.BezierSpline
                 easing.bezierCurve: Config.animation.curves.bubblyWidth
                 target: root
                 property: "anchors.bottomMargin"
@@ -129,7 +129,7 @@ Item {
             }
         }
     }
-    
+
     anchors {
         bottom: parent.bottom
         bottomMargin: implicitHiddenMargin

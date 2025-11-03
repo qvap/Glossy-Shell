@@ -11,16 +11,7 @@ import qs.components
 import qs.services
 import qs.config
 
-/* entry point for widgets (you call it drawer or smth)
-/* it's such a bullshit, let me explain why:
-/* when using the workaround with backdrop blur,
-/* the only thing I could do is set alpha threshold
-/* at some value like 0.1. It works fine for blurring,
-/* but it also accounts shadow like it's not opaque and
-/* blurs behind them anything too. So idk how to do it
-/* and I just made two windows: one for blur stuff
-/* and another for shadows. It keeps me tied up
-/* UPD: I abandoned idea with blur :p*/
+/* entry point for widgets (you call it drawer or smth) */
 
 Scope {
 

@@ -3,6 +3,7 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import "../scripts/fuzzysearch.js" as Fuzzy
 
 /* vibe-coded service cuz i hate clis */
 
@@ -61,6 +62,22 @@ Singleton {
     function setWallpaperPath(path) {
         root.wallpaperPath = path;
         loadWallpapers();
+    }
+
+    function filterWallpapers(searchText) {
+        if (!searchText || searchText.length === 0) {
+            return root.wallpapers;
+        }
+        const filtered = root.wallpapers.filter(wallpaperPath => {
+            const fileName = wallpaperPath.split('/').pop();
+            return Fuzzy.fuzzy_search(fileName, searchText);
+        });
+
+        return filtered.sort((a, b) => {
+            const nameA = a.split('/').pop().toLowerCase();
+            const nameB = b.split('/').pop().toLowerCase();
+            return nameA.localeCompare(nameB);
+        });
     }
 
     Component.onCompleted: {

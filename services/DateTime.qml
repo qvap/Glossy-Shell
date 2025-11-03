@@ -6,6 +6,7 @@ import Quickshell
 import Quickshell.Io
 
 /* im vewy shy and vewy sowwy that I yanked that from end-4's shell (,,>﹏<,,) */
+/* reworked some parts tho */
 
 Singleton {
     property var clock: SystemClock {
@@ -18,26 +19,30 @@ Singleton {
     property string collapsedCalendarFormat: Qt.locale().toString(clock.date, "dd MMMM yyyy")
     property string uptime: "0h, 0m"
 
-    Timer { //toDo: rework clock to use quickshell services
-        interval: 10
+    Timer {
+        interval: 3000
         running: true
         repeat: true
-        onTriggered: {
-            fileUptime.reload()
-            const textUptime = fileUptime.text()
-            const uptimeSeconds = Number(textUptime.split(" ")[0] ?? 0)
+        triggeredOnStart: true
+        onTriggered: updateUptime()
+    }
 
-            const days = Math.floor(uptimeSeconds / 86400)
-            const hours = Math.floor((uptimeSeconds % 86400) / 3600)
-            const minutes = Math.floor((uptimeSeconds % 3600) / 60)
+    function updateUptime() {
+        fileUptime.reload()
+        const textUptime = fileUptime.text()
+        const uptimeSeconds = Number(textUptime.split(" ")[0] ?? 0)
 
-            let formatted = ""
-            if (days > 0) formatted += `${days}d`
-            if (hours > 0) formatted += `${formatted ? ", " : ""}${hours}h`
-            if (minutes > 0 || !formatted) formatted += `${formatted ? ", " : ""}${minutes}m`
-            uptime = formatted
-            interval = 3000
-        }
+        const days = Math.floor(uptimeSeconds / 86400)
+        const hours = Math.floor((uptimeSeconds % 86400) / 3600)
+        const minutes = Math.floor((uptimeSeconds % 3600) / 60)
+
+        const parts = [
+            days > 0 ? `${days}d` : "",
+            hours > 0 ? `${hours}h` : "",
+            minutes >= 0 || days === 0 && hours === 0 ? `${minutes}m` : ""
+        ].filter(Boolean)
+
+        uptime = parts.join(", ")
     }
 
     FileView {

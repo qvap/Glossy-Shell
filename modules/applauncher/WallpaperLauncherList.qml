@@ -26,7 +26,10 @@ StyledListView {
     preferredHighlightEnd: width / 2 + itemWidth / 2
     highlightRangeMode: ListView.StrictlyEnforceRange
 
-    model: Wallpapers.wallpapers
+    model: ScriptModel {
+        values: Wallpapers.filterWallpapers(searchText)
+        onValuesChanged: root.currentIndex = 0
+    }
 
     delegate: WallpaperItem {
         currentIndex: root.currentIndex
