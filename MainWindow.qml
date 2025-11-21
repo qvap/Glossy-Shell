@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import qs.modules.applauncher
+import qs.modules.notifications
 import qs.modules
 import qs.components.containers
 import qs.components
@@ -79,6 +80,8 @@ Scope {
                 screen: modelData
                 focusState: focusGrab.active
             }
+
+            NotificationCenter {}
         }
     }
 

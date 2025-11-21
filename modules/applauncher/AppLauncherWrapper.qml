@@ -44,9 +44,11 @@ Item {
         running: false
         ScriptAction {
             script: {
-                if (hide.running) { hide.stop() }
-                launcher.active = true
-                launcher.visible = true
+                if (hide.running) {
+                    hide.stop();
+                }
+                launcher.active = true;
+                launcher.visible = true;
             }
         }
         ParallelAnimation {
@@ -72,7 +74,7 @@ Item {
                 easing.bezierCurve: Config.animation.curves.bubblyWidth
                 target: root
                 property: "anchors.bottomMargin"
-                to: implicitBottomMargin
+                to: root.implicitBottomMargin
             }
             BaseAnimation {
                 duration: Config.animation.duration.small
@@ -89,7 +91,9 @@ Item {
         running: false
         ScriptAction {
             script: {
-                if (show.running) { show.stop() }
+                if (show.running) {
+                    show.stop();
+                }
             }
         }
         ParallelAnimation {
@@ -124,8 +128,8 @@ Item {
         }
         ScriptAction {
             script: {
-                launcher.visible = false
-                launcher.active = false
+                launcher.visible = false;
+                launcher.active = false;
             }
         }
     }
@@ -156,9 +160,9 @@ Item {
         target: Global
         function onLauncherOpenChanged() {
             if (Global.launcherOpen) {
-                show.start()
+                show.start();
             } else {
-                hide.start()
+                hide.start();
             }
         }
     }
@@ -167,7 +171,7 @@ Item {
         target: "launcher"
 
         function toggle() {
-            Global.launcherOpen = !Global.launcherOpen
+            Global.launcherOpen = !Global.launcherOpen;
         }
     }
 }
