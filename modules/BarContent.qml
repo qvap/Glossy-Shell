@@ -30,10 +30,6 @@ Item {
             right: middleSection.left
         }
         spacing: 10
-
-        WorkspacesWidget {
-            Layout.alignment: Qt.AlignVCenter
-        }
     }
 
     RowLayout {
@@ -44,6 +40,10 @@ Item {
             horizontalCenter: parent.horizontalCenter
         }
         spacing: 4
+
+        WorkspacesWidget {
+            Layout.alignment: Qt.AlignVCenter
+        }
     }
 
     RowLayout {

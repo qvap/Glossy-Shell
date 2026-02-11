@@ -24,7 +24,7 @@ Singleton {
                 if (output.length > 0) {
                     const files = output.split('\n').filter(file => {
                         const lower = file.toLowerCase();
-                        return lower.endsWith('.png') || lower.endsWith('.jpg') || lower.endsWith('.jpeg');
+                        return lower.endsWith('.png') || lower.endsWith('.jpg') || lower.endsWith('.jpeg') || lower.endsWith('.gif');
                     });
                     root.wallpapers = files;
                     console.log(`Loaded ${files.length} wallpapers from ${root.wallpaperPath}`);
@@ -55,7 +55,7 @@ Singleton {
         root.wallpapers = [];
         console.log(`Loading wallpapers from: ${root.wallpaperPath}`);
 
-        process.command = ["sh", "-c", `find -L "${root.wallpaperPath}" -maxdepth 1 -type f \\( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \\) 2>/dev/null`];
+        process.command = ["sh", "-c", `find -L "${root.wallpaperPath}" -maxdepth 1 -type f \\( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.gif" \\) 2>/dev/null`];
         process.running = true;
     }
 
