@@ -14,6 +14,7 @@ HoverableBarWidget {
         font.bold: true
         color: "white"
         text: HyprlandXkb.currentLayoutCode.toUpperCase()
+        font.pixelSize: Config.style.fonts.largeSize - 2.0 // bad practice? idc
         Behavior on text {
             SequentialAnimation {
                 NumberAnimation {
@@ -53,6 +54,7 @@ HoverableBarWidget {
         text: HyprlandXkb.currentLayoutName
         opacity: root.hovered ? 1 : 0
         Layout.preferredWidth: root.hovered ? implicitWidth : 0
+        font.pixelSize: Config.style.fonts.largeSize - 2.0
         Behavior on text {
             SequentialAnimation {
                 NumberAnimation {

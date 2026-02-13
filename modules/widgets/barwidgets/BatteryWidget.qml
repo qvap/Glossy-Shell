@@ -53,11 +53,11 @@ HoverableBarWidget {
 
     onChargingChanged: {
         root.hovered = true;
-        startTimer();
+        restartTimer();
     }
 
     MaterialIcon {
-        text: (UPower.displayDevice.isLaptopBattery && !root.charging) ? getBatteryIcon(Math.round(UPower.displayDevice.percentage * 100)) : "water_ec"
+        text: (UPower.displayDevice.isLaptopBattery && !root.charging) ? root.getBatteryIcon(Math.round(UPower.displayDevice.percentage * 100)) : "water_ec"
         color: "white"
         Layout.alignment: Qt.AlignVCenter || Qt.AlignHCenter
     }
@@ -74,6 +74,7 @@ HoverableBarWidget {
     StyledText {
         wrapping: false
         font.bold: true
+        font.pixelSize: Config.style.fonts.largeSize - 2.0
         color: "white"
         text: (UPower.displayDevice.isLaptopBattery) ? Math.round(UPower.displayDevice.percentage * 100) + "%" : "😝"
         opacity: root.hovered ? 1 : 0

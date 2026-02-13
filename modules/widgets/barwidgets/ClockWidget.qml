@@ -14,6 +14,7 @@ HoverableBarWidget {
     StyledText {
         wrapping: false
         font.bold: true
+        font.pixelSize: Config.style.fonts.largeSize - 2.0
         color: "white"
         text: DateTime.time
     }
@@ -30,6 +31,7 @@ HoverableBarWidget {
     StyledText {
         wrapping: false
         font.bold: true
+        font.pixelSize: Config.style.fonts.largeSize - 2.0
         color: "white"
         text: DateTime.shortDate
         opacity: root.hovered ? 1 : 0

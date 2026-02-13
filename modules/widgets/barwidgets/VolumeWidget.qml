@@ -25,24 +25,27 @@ HoverableBarWidget {
     property int translatedVolume: Math.round(Audio.defaultSinkVolume * 100)
 
     readonly property string currentVolumeIcon: {
-        if (Audio.defaultSinkMuted) return "volume_off"
-        if (translatedVolume < 30) return "volume_mute"
-        if (translatedVolume < 60) return "volume_down"
-        return "volume_up"
+        if (Audio.defaultSinkMuted)
+            return "volume_off";
+        if (translatedVolume < 30)
+            return "volume_mute";
+        if (translatedVolume < 60)
+            return "volume_down";
+        return "volume_up";
     }
 
     onTranslatedVolumeChanged: {
-        expand()
+        expand();
     }
 
     MaterialIcon {
-        discretSize: -1.0 // stupid misalignment
+        discretSize: -5.0 // stupid misalignment
         text: root.currentVolumeIcon
         color: "white"
         Layout.alignment: Qt.AlignVCenter || Qt.AlignHCenter
 
         onTextChanged: {
-            expand()
+            root.expand();
         }
     }
 
@@ -52,6 +55,7 @@ HoverableBarWidget {
         color: "white"
         text: "  ✧   "
         opacity: root.hovered ? 1 : 0
+        Layout.alignment: Qt.AlignVCenter || Qt.AlignHCenter
         Layout.preferredWidth: root.hovered ? implicitWidth : 0
     }
 
@@ -59,8 +63,9 @@ HoverableBarWidget {
         wrapping: false
         font.bold: true
         color: "white"
-        text: translatedVolume
+        text: root.translatedVolume
         opacity: root.hovered ? 1 : 0
+        Layout.alignment: Qt.AlignVCenter || Qt.AlignHCenter
         Layout.preferredWidth: root.hovered ? implicitWidth : 0
     }
 }
