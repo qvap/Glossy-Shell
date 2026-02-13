@@ -47,7 +47,7 @@ HoverableBarWidget {
     ]
 
     function getBatteryIcon(percentage) { // should test it
-        const index = Math.min(Math.floor(percentage / 15), batteryIcons.length - 1);
+        const index = Math.min(Math.floor(percentage / 13), batteryIcons.length - 1);
         return batteryIcons[Math.max(0, index)].icon;
     }
 
