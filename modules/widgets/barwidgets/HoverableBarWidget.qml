@@ -14,6 +14,7 @@ Item {
     property int padding: 10
     property bool hovered: false
     property int hoverTimeout: 1000
+    clip: true
 
     Timer {
         id: hoverTimer
@@ -31,18 +32,17 @@ Item {
     }
 
     function restartTimer() {
-        hoverTimer.restart()
+        hoverTimer.restart();
     }
 
     function expand() {
         root.hovered = true;
-        restartTimer()
+        restartTimer();
     }
 
     RowLayout {
         id: rowLayout
         anchors.centerIn: parent
         spacing: 0
-        clip: true
     }
 }

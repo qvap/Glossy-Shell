@@ -1,6 +1,6 @@
 import QtQuick
+import QtQml
 import QtQuick.Shapes
-import QtQuick.Effects
 import Quickshell.Widgets
 import qs.config
 
@@ -45,16 +45,18 @@ Item {
             radius: baseRect.radius
             color: "transparent"
             Shape {
+                id: glowShape
+                anchors.fill: parent
                 ShapePath {
                     id: shape
                     strokeWidth: 0
                     fillGradient: RadialGradient {
                         id: gradient
-                        centerX: root.width / 2
-                        centerY: root.height
-                        centerRadius: root.height * 0.8
-                        focalX: centerX
-                        focalY: centerY
+                        centerX: glowShape.width / 2
+                        centerY: glowShape.height
+                        centerRadius: glowShape.height * 0.8
+                        focalX: glowShape.width / 2 //centerX
+                        focalY: glowShape.height //centerY
                         GradientStop {
                             position: 0.2
                             color: Qt.lighter(root.mainColor, Config.style.colorFactors.glowLight)
@@ -65,16 +67,32 @@ Item {
                         }
                     }
 
-                    PathRectangle {
-                        width: root.width
-                        height: root.height
+                    PathMove {
+                        x: 0
+                        y: 0
+                    }
+                    PathLine {
+                        relativeX: glowShape.width
+                        relativeY: 0
+                    }
+                    PathLine {
+                        relativeX: 0
+                        relativeY: glowShape.height
+                    }
+                    PathLine {
+                        relativeX: -glowShape.width
+                        relativeY: 0
+                    }
+                    PathLine {
+                        relativeX: 0
+                        relativeY: -glowShape.height
                     }
                 }
 
                 transform: Scale {
-                    origin.x: root.width / 2
-                    origin.y: root.height / 2
-                    xScale: root.width / Config.style.gradients.panel_glow_width
+                    origin.x: glowShape.width / 2
+                    origin.y: glowShape.height / 2
+                    xScale: Math.max(1.0, glowShape.width / Config.style.gradients.panel_glow_width)
                     yScale: 1.0
                 }
             }
