@@ -4,13 +4,16 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
+import QtQuick.Layouts
 import qs.modules.applauncher
 import qs.modules.notifications
+import qs.modules.widgets.barwidgets
 import qs.modules
 import qs.components.containers
 import qs.components
 import qs.services
 import qs.config
+import qs
 
 /* entry point for widgets (you call it drawer or smth) */
 
@@ -35,6 +38,12 @@ Scope {
                 },
                 Region {
                     item: applauncher
+                },
+                Region {
+                    x: trayPopOut.x
+                    y: trayPopOut.y
+                    width: trayPopOut.visible ? trayPopOut.width : 0
+                    height: trayPopOut.visible ? trayPopOut.height : 0
                 }
             ]
 
@@ -75,13 +84,17 @@ Scope {
                 id: bar
             } // decided to move it to main window so I can do more stuff :3
 
+            NotificationCenter {}
+
+            TrayPopOut {
+                id: trayPopOut
+            }
+
             AppLauncherWrapper {
                 id: applauncher
                 screen: modelData
                 focusState: focusGrab.active
             }
-
-            NotificationCenter {}
         }
     }
 
