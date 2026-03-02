@@ -4,6 +4,8 @@ import QtQuick
 import qs.config
 import qs
 
+// SOME ELEMENTS ARE VIBE_CODED // SUBJECT TO REVIEW
+
 MouseArea {
     id: root
 

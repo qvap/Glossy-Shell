@@ -16,6 +16,7 @@ import qs.config
 import qs
 
 /* entry point for widgets (you call it drawer or smth) */
+// SOME ELEMENTS ARE VIBE_CODED // SUBJECT TO REVIEW
 
 Scope {
 
@@ -29,23 +30,19 @@ Scope {
             name: "main"
 
             required property ShellScreen modelData
-            property list<Region> widgetRegions: [
-                /* could be better with dynamic list appends
-                and reactive bindings, but I have no budget
-                for this */
-                Region {
-                    item: bar
-                },
-                Region {
-                    item: applauncher
-                },
-                Region {
-                    x: trayPopOut.x
-                    y: trayPopOut.y
-                    width: trayPopOut.visible ? trayPopOut.width : 0
-                    height: trayPopOut.visible ? trayPopOut.height : 0
+
+            function buildMaskRegions(): list<Region> {
+                let regions = [barRegion, applauncherRegion, trayPopOutRegion];
+                // force dependency on stack length so this re-evaluates
+                void (Global.subMenuStack.length);
+                for (let i = 0; i < subMenuRepeater.count; i++) {
+                    let item = subMenuRepeater.itemAt(i);
+                    if (item && item.visible) {
+                        regions.push(item.inputRegion);
+                    }
                 }
-            ]
+                return regions;
+            }
 
             WlrLayershell.layer: WlrLayer.Overlay
             WlrLayershell.exclusionMode: ExclusionMode.Ignore
@@ -65,7 +62,25 @@ Scope {
             }
 
             mask: Region {
-                regions: widgetRegions
+                regions: root.buildMaskRegions()
+            }
+
+            Region {
+                id: barRegion
+                item: bar
+            }
+
+            Region {
+                id: applauncherRegion
+                item: applauncher
+            }
+
+            Region {
+                id: trayPopOutRegion
+                x: trayPopOut.x
+                y: trayPopOut.y
+                width: trayPopOut.visible ? trayPopOut.width : 0
+                height: trayPopOut.visible ? trayPopOut.height : 0
             }
 
             ContainerWindow {
@@ -88,6 +103,31 @@ Scope {
 
             TrayPopOut {
                 id: trayPopOut
+            }
+
+            Repeater {
+                id: subMenuRepeater
+                model: Global.subMenuStack
+
+                delegate: SubMenuPopOut {
+                    id: subMenuDelegate
+
+                    required property var modelData
+                    required property int index
+
+                    property Region inputRegion: Region {
+                        x: subMenuDelegate.x
+                        y: subMenuDelegate.y
+                        width: subMenuDelegate.visible ? subMenuDelegate.width : 0
+                        height: subMenuDelegate.visible ? subMenuDelegate.height : 0
+                    }
+
+                    menuEntry: modelData.menu
+                    depth: index
+                    targetX: modelData.rightX
+                    targetY: modelData.y
+                    sideAltX: modelData.leftX
+                }
             }
 
             AppLauncherWrapper {
